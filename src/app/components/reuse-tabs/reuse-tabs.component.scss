@@ -1,0 +1,15 @@
+@import "styles/scss/sdk";
+
+nz-tabset{
+  padding: 10px 10px 0;
+
+  .anticon-close{
+    margin-left: 5px;
+  }
+}
+
+:host ::ng-deep {
+  .ant-tabs-bar{
+   margin-bottom: 0;
+  }
+}

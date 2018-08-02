@@ -1,2 +1,18 @@
-<app-reuse-tabs></app-reuse-tabs>
-<router-outlet></router-outlet>
+<nz-layout class="app-container">
+  <nz-header>
+
+  </nz-header>
+  <nz-content>
+    <nz-layout>
+      <nz-sider>
+
+      </nz-sider>
+      <nz-content class="main-content-wrapper">
+        <app-reuse-tabs></app-reuse-tabs>
+        <section class="main-content">
+          <router-outlet></router-outlet>
+        </section>
+      </nz-content>
+    </nz-layout>
+  </nz-content>
+</nz-layout>
