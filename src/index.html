@@ -2,13 +2,47 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>XiuAdminClient</title>
-  <base href="/">
-
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>xiu admin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <base href="/">
+  <style type="text/css">
+    .loading:before, .loading:after{
+      content: '';
+      position: absolute;
+      left:0;
+      top:0;
+      right:0;
+      bottom:0;
+      z-index: 1000;
+      background: #fff;
+    }
+
+    .loading:after{
+      font-family: "Helvetica Neue", Helvetica, sans-serif;
+      content: "LOADING...";
+      text-align: center;
+      color: #000;
+      opacity: .8;
+      font-size: 24px;
+      letter-spacing: 4px;
+      animation: loading 1s alternate infinite;
+      display: flex;
+      justify-content: center;
+      align-content: center;
+      align-items: center;
+    }
+
+    @keyframes loading {
+      to {
+        opacity: .2;
+      }
+    }
+  </style>
 </head>
 <body>
-  <app-root></app-root>
+  <app-root>
+    <div class="loading"></div>
+  </app-root>
 </body>
 </html>
