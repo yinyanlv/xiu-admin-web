@@ -8,6 +8,11 @@
 
   nz-header {
     background: $theme-color;
+    padding: 0;
+  }
+
+  nz-sider {
+    background: #fff;
   }
 
   & > nz-content {
@@ -15,11 +20,6 @@
     display: flex;
     justify-content: stretch;
   }
-
-  nz-sider{
-    background: #fff;
-  }
-
 
   .main-content-wrapper{
     display: flex;
@@ -43,5 +43,9 @@
   html, body {
     width: 100%;
     height: 100%;
+  }
+
+  nz-header {
+    padding: 0;
   }
 }
