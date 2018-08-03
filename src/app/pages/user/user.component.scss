@@ -1,0 +1,32 @@
+@import "styles/scss/sdk";
+
+.options{
+  height: 40px;
+  display: flex;
+  align-items: center;
+
+  button {
+    margin-right: 10px;
+  }
+}
+
+.panel {
+  .title {
+    @include setHeightGroup(24px);
+    font-weight: bold;
+  }
+  .content {
+    padding: 10px 0;
+  }
+}
+
+.btn-line{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 0;
+
+  button {
+    margin-right: 10px;
+  }
+}

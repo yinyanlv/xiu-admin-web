@@ -1,30 +1,27 @@
 <section class="aside">
   <ul nz-menu [nzMode]="'inline'">
     <li nz-submenu>
-      <span title><i class="anticon anticon-user"></i>subnav 1</span>
+      <span title><i class="anticon anticon-dashboard"></i>统计监控</span>
       <ul>
-        <li nz-menu-item>option1</li>
-        <li nz-menu-item>option2</li>
-        <li nz-menu-item>option3</li>
-        <li nz-menu-item>option4</li>
+        <li nz-menu-item><a routerLink="/analysis">统计分析</a></li>
+        <li nz-menu-item><a routerLink="/monitor">系统监控</a></li>
+        <li nz-menu-item><a routerLink="/log">操作记录</a></li>
       </ul>
     </li>
     <li nz-submenu>
-      <span title><i class="anticon anticon-laptop"></i>subnav 2</span>
+      <span title><i class="anticon anticon-table"></i>功能模块</span>
       <ul>
-        <li nz-menu-item>option5</li>
-        <li nz-menu-item>option6</li>
-        <li nz-menu-item>option7</li>
-        <li nz-menu-item>option8</li>
+        <li nz-menu-item><a routerLink="/category">分类管理</a></li>
+        <li nz-menu-item><a routerLink="/article">文章管理</a></li>
+        <li nz-menu-item><a routerLink="/comment">评论管理</a></li>
+        <li nz-menu-item><a routerLink="/user">用户管理</a></li>
       </ul>
     </li>
     <li nz-submenu>
-      <span title><i class="anticon anticon-notification"></i>subnav 3</span>
+      <span title><i class="anticon anticon-profile"></i>系统设置</span>
       <ul>
-        <li nz-menu-item>option9</li>
-        <li nz-menu-item>option10</li>
-        <li nz-menu-item>option11</li>
-        <li nz-menu-item>option12</li>
+        <li nz-menu-item><a routerLink="/site-info">网站信息</a></li>
+        <li nz-menu-item><a routerLink="/user-info">用户信息</a></li>
       </ul>
     </li>
   </ul>

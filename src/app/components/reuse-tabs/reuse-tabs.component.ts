@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 export interface Tab {
   code: string;
-  title: string;
+  name: string;
   url: string;
 }
 
@@ -15,17 +15,41 @@ export class ReuseTabsComponent implements OnInit {
 
   index = 0;
   tabs: Array<Tab> = [{
-    code: '1',
-    title: '1',
-    url: '1'
+    code: '',
+    name: '统计分析',
+    url: ''
   }, {
-    code: '1',
-    title: '1',
-    url: '1'
+    code: '',
+    name: '系统监控',
+    url: ''
   }, {
-    code: '1',
-    title: '1',
-    url: '1'
+    code: '',
+    name: '操作记录',
+    url: ''
+  }, {
+    code: '',
+    name: '分类管理',
+    url: ''
+  }, {
+    code: '',
+    name: '文章管理',
+    url: ''
+  }, {
+    code: '',
+    name: '评论管理',
+    url: ''
+  }, {
+    code: '',
+    name: '用户管理',
+    url: ''
+  }, {
+    code: '',
+    name: '网站信息',
+    url: ''
+  }, {
+    code: '',
+    name: '用户信息',
+    url: ''
   }];
 
   constructor() { }

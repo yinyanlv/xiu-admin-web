@@ -2,6 +2,7 @@
 
 nz-tabset{
   padding: 10px 10px 0;
+  background: #fff;
 
   .anticon-close{
     margin-left: 5px;
@@ -11,5 +12,19 @@ nz-tabset{
 :host ::ng-deep {
   .ant-tabs-bar{
    margin-bottom: 0;
+  }
+
+  .ant-tabs-nav-wrap {
+
+    .ant-tabs-nav{
+
+      .ant-tabs-tab{
+        background: #f0f2f5;
+
+        &.ant-tabs-tab-active{
+          background: #fff;
+        }
+      }
+    }
   }
 }

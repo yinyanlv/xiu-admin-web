@@ -10,7 +10,14 @@ const routes: Routes = [{
   component: DefaultLayoutComponent,
   children: [{
     path: '',
-    loadChildren: './pages/home/home.module#HomeModule'
+    pathMatch: 'full',
+    redirectTo: 'analysis'
+  }, {
+    path: 'analysis',
+    loadChildren: './pages/analysis/analysis.module#AnalysisModule'
+  }, {
+    path: 'user',
+    loadChildren: './pages/user/user.module#UserModule'
   }]
 }, {
   path: '',

@@ -1,0 +1,109 @@
+<nz-card>
+  <div class="panel">
+    <div class="title">查询区域</div>
+    <div class="content">
+      <form nz-form [nzLayout]="'inline'">
+        <nz-form-item>
+          <nz-form-label>用户名</nz-form-label>
+          <nz-form-control>
+            <input nz-input placeholder="请输入用户名">
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label>用户昵称</nz-form-label>
+          <nz-form-control>
+            <input nz-input placeholder="请输入用户昵称">
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label>角色</nz-form-label>
+          <nz-form-control>
+            <nz-select nzPlaceHolder="请选择角色">
+              <nz-option>超级管理员</nz-option>
+              <nz-option>管理员</nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label>状态</nz-form-label>
+          <nz-form-control>
+            <nz-select nzPlaceHolder="请选择状态">
+              <nz-option>正常</nz-option>
+              <nz-option>禁用</nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label>用户名</nz-form-label>
+          <nz-form-control>
+            <input nz-input placeholder="请输入用户名">
+          </nz-form-control>
+        </nz-form-item>
+      </form>
+      <div class="btn-line">
+        <button nz-button nzType="primary">查询</button>
+        <button nz-button>重置</button>
+      </div>
+    </div>
+  </div>
+  <div class="panel">
+    <div class="title">列表区域</div>
+    <div class="content">
+      <div class="options">
+        <button nz-button nzType="primary">
+          <i class="anticon anticon-addfile"></i><span>新建</span>
+        </button>
+        <button nz-button>
+          <i class="anticon anticon-edit"></i><span>修改</span>
+        </button>
+        <button nz-button nzType="danger">
+          <i class="anticon anticon-delete"></i><span>删除</span>
+        </button>
+      </div>
+      <nz-table #nzTable [nzData]="data" [nzPageSize]="20">
+        <thead>
+        <tr>
+          <th nzShowCheckbox></th>
+          <th nzShowSort>用户名</th>
+          <th nzShowSort>用户昵称</th>
+          <th nzShowSort>角色</th>
+          <th nzShowSort>状态</th>
+          <th nzShowSort>邮箱</th>
+          <th nzShowSort>手机</th>
+          <th nzShowSort>QQ</th>
+          <th nzShowSort>最后登录时间</th>
+          <th nzShowSort>创建人</th>
+          <th nzShowSort>创建时间</th>
+          <th nzShowSort>最后修改人</th>
+          <th nzShowSort>最后修改时间</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let item of nzTable.data">
+          <td nzShowCheckbox></td>
+          <td>{{item.username}}</td>
+          <td>{{item.nickname}}</td>
+          <td>{{item.roleName}}</td>
+          <td>{{item.statusName}}</td>
+          <td>{{item.email}}</td>
+          <td>{{item.phone}}</td>
+          <td>{{item.qq}}</td>
+          <td>{{item.lastLoginTime}}</td>
+          <td>{{item.createBy}}</td>
+          <td>{{item.createTime}}</td>
+          <td>{{item.updateBy}}</td>
+          <td>{{item.updateTime}}</td>
+        </tr>
+        </tbody>
+      </nz-table>
+    </div>
+  </div>
+</nz-card>
+<ng-template #editModal>
+  <nz-form-item>
+    <nz-form-label>描述</nz-form-label>
+    <nz-form-control>
+      <input nz-input  name="description" placeholder="请输入">
+    </nz-form-control>
+  </nz-form-item>
+</ng-template>
