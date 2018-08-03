@@ -1,5 +1,5 @@
 <nz-card>
-  <div class="panel">
+  <div class="panel query-panel">
     <div class="title">查询区域</div>
     <div class="content">
       <form nz-form [nzLayout]="'inline'">
@@ -19,8 +19,8 @@
           <nz-form-label>角色</nz-form-label>
           <nz-form-control>
             <nz-select nzPlaceHolder="请选择角色">
-              <nz-option>超级管理员</nz-option>
-              <nz-option>管理员</nz-option>
+              <nz-option nzValue="2" nzLabel="超级管理员"></nz-option>
+              <nz-option nzValue="1" nzLabel="管理员"></nz-option>
             </nz-select>
           </nz-form-control>
         </nz-form-item>
@@ -28,15 +28,33 @@
           <nz-form-label>状态</nz-form-label>
           <nz-form-control>
             <nz-select nzPlaceHolder="请选择状态">
-              <nz-option>正常</nz-option>
-              <nz-option>禁用</nz-option>
+              <nz-option nzValue="0" nzLabel="正常"></nz-option>
+              <nz-option nzValue="1" nzLabel="禁用"></nz-option>
             </nz-select>
           </nz-form-control>
         </nz-form-item>
         <nz-form-item>
-          <nz-form-label>用户名</nz-form-label>
+          <nz-form-label>邮箱</nz-form-label>
           <nz-form-control>
-            <input nz-input placeholder="请输入用户名">
+            <input nz-input placeholder="请输入邮箱">
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label>手机</nz-form-label>
+          <nz-form-control>
+            <input nz-input placeholder="请输入手机">
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label>QQ</nz-form-label>
+          <nz-form-control>
+            <input nz-input placeholder="请输入QQ">
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label>最后登录时间</nz-form-label>
+          <nz-form-control class="date-range">
+            <nz-range-picker nzShowTime [nzPlaceHolder]="['起始时间', '截止时间']"></nz-range-picker>
           </nz-form-control>
         </nz-form-item>
       </form>
@@ -46,11 +64,11 @@
       </div>
     </div>
   </div>
-  <div class="panel">
+  <div class="panel table-panel">
     <div class="title">列表区域</div>
     <div class="content">
       <div class="options">
-        <button nz-button nzType="primary">
+        <button nz-button nzType="primary" (click)="createUser()">
           <i class="anticon anticon-addfile"></i><span>新建</span>
         </button>
         <button nz-button>
@@ -60,50 +78,96 @@
           <i class="anticon anticon-delete"></i><span>删除</span>
         </button>
       </div>
-      <nz-table #nzTable [nzData]="data" [nzPageSize]="20">
-        <thead>
-        <tr>
-          <th nzShowCheckbox></th>
-          <th nzShowSort>用户名</th>
-          <th nzShowSort>用户昵称</th>
-          <th nzShowSort>角色</th>
-          <th nzShowSort>状态</th>
-          <th nzShowSort>邮箱</th>
-          <th nzShowSort>手机</th>
-          <th nzShowSort>QQ</th>
-          <th nzShowSort>最后登录时间</th>
-          <th nzShowSort>创建人</th>
-          <th nzShowSort>创建时间</th>
-          <th nzShowSort>最后修改人</th>
-          <th nzShowSort>最后修改时间</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let item of nzTable.data">
-          <td nzShowCheckbox></td>
-          <td>{{item.username}}</td>
-          <td>{{item.nickname}}</td>
-          <td>{{item.roleName}}</td>
-          <td>{{item.statusName}}</td>
-          <td>{{item.email}}</td>
-          <td>{{item.phone}}</td>
-          <td>{{item.qq}}</td>
-          <td>{{item.lastLoginTime}}</td>
-          <td>{{item.createBy}}</td>
-          <td>{{item.createTime}}</td>
-          <td>{{item.updateBy}}</td>
-          <td>{{item.updateTime}}</td>
-        </tr>
-        </tbody>
-      </nz-table>
+      <div class="table-wrapper">
+        <nz-table #nzTable [nzData]="data" [nzPageSize]="20">
+          <thead>
+          <tr>
+            <th nzShowCheckbox></th>
+            <th nzShowSort nzWidth="100px">用户名</th>
+            <th nzShowSort nzWidth="120px">用户昵称</th>
+            <th nzShowSort nzWidth="100px">角色</th>
+            <th nzShowSort nzWidth="100px">状态</th>
+            <th nzShowSort nzWidth="120px">邮箱</th>
+            <th nzShowSort nzWidth="100px">手机</th>
+            <th nzShowSort nzWidth="100px">QQ</th>
+            <th nzShowSort nzWidth="140px">最后登录时间</th>
+            <th nzShowSort nzWidth="120px">创建人</th>
+            <th nzShowSort nzWidth="140px">创建时间</th>
+            <th nzShowSort nzWidth="140px">最后修改人</th>
+            <th nzShowSort nzWidth="140px">最后修改时间</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let item of nzTable.data">
+            <td nzShowCheckbox></td>
+            <td>{{item.username}}</td>
+            <td>{{item.nickname}}</td>
+            <td>{{item.roleName}}</td>
+            <td>{{item.statusName}}</td>
+            <td>{{item.email}}</td>
+            <td>{{item.phone}}</td>
+            <td>{{item.qq}}</td>
+            <td>{{item.lastLoginTime}}</td>
+            <td>{{item.createBy}}</td>
+            <td>{{item.createTime}}</td>
+            <td>{{item.updateBy}}</td>
+            <td>{{item.updateTime}}</td>
+          </tr>
+          </tbody>
+        </nz-table>
+      </div>
     </div>
   </div>
 </nz-card>
-<ng-template #editModal>
-  <nz-form-item>
-    <nz-form-label>描述</nz-form-label>
-    <nz-form-control>
-      <input nz-input  name="description" placeholder="请输入">
-    </nz-form-control>
-  </nz-form-item>
-</ng-template>
+<nz-modal [(nzVisible)]="isVisible" nzTitle="新建用户" nzWidth="700" class="edit-modal" nzOkText="保存" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+  <form nz-form [nzLayout]="'inline'">
+    <nz-form-item>
+      <nz-form-label nzRequired>用户名</nz-form-label>
+      <nz-form-control>
+        <input nz-input placeholder="请输入用户名">
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label nzRequired>用户昵称</nz-form-label>
+      <nz-form-control>
+        <input nz-input placeholder="请输入用户昵称">
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label nzRequired>角色</nz-form-label>
+      <nz-form-control>
+        <nz-select nzPlaceHolder="请选择角色">
+          <nz-option nzValue="2" nzLabel="超级管理员"></nz-option>
+          <nz-option nzValue="1" nzLabel="管理员"></nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label nzRequired>状态</nz-form-label>
+      <nz-form-control>
+        <nz-select nzPlaceHolder="请选择状态">
+          <nz-option nzValue="0" nzLabel="正常"></nz-option>
+          <nz-option nzValue="1" nzLabel="禁用"></nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label nzRequired>邮箱</nz-form-label>
+      <nz-form-control>
+        <input nz-input placeholder="请输入邮箱">
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label nzRequired>手机</nz-form-label>
+      <nz-form-control>
+        <input nz-input placeholder="请输入手机">
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label>QQ</nz-form-label>
+      <nz-form-control>
+        <input nz-input placeholder="请输入QQ">
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</nz-modal>

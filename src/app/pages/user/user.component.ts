@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserComponent implements OnInit {
 
+  isVisible: boolean = false;
   data: Array<any> = [];
 
   constructor() { }
@@ -14,4 +15,15 @@ export class UserComponent implements OnInit {
   ngOnInit() {
   }
 
+  createUser() {
+    this.isVisible = !this.isVisible;
+  }
+
+  handleOk(): void {
+    this.isVisible = false;
+  }
+
+  handleCancel(): void {
+    this.isVisible = false;
+  }
 }
