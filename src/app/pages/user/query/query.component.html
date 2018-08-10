@@ -1,0 +1,63 @@
+<div class="panel query-panel">
+  <div class="title">查询区域</div>
+  <div class="content">
+    <form nz-form [nzLayout]="'inline'" [formGroup]="form">
+      <nz-form-item>
+        <nz-form-label>用户名</nz-form-label>
+        <nz-form-control>
+          <input nz-input formControlName="username" placeholder="请输入用户名">
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label>用户昵称</nz-form-label>
+        <nz-form-control>
+          <input nz-input formControlName="nickname" placeholder="请输入用户昵称">
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label>角色</nz-form-label>
+        <nz-form-control>
+          <nz-select nzPlaceHolder="请选择角色" formControlName="role">
+            <nz-option *ngFor="let item of roles;" [nzValue]="item.code" [nzLabel]="item.name"></nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label>状态</nz-form-label>
+        <nz-form-control>
+          <nz-select nzPlaceHolder="请选择状态" formControlName="status">
+            <nz-option *ngFor="let item of statuses;" [nzValue]="item.code" [nzLabel]="item.name"></nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label>邮箱</nz-form-label>
+        <nz-form-control>
+          <input nz-input formControlName="email" placeholder="请输入邮箱">
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label>手机</nz-form-label>
+        <nz-form-control>
+          <input nz-input formControlName="phone" placeholder="请输入手机">
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label>QQ</nz-form-label>
+        <nz-form-control>
+          <input nz-input formControlName="qq" placeholder="请输入QQ">
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label>最后登录时间</nz-form-label>
+        <nz-form-control class="date-range">
+          <nz-range-picker nzShowTime formControlName="lastLoginTime" [nzPlaceHolder]="['起始时间', '截止时间']"></nz-range-picker>
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+    <div class="btn-line">
+      <button nz-button nzType="primary" (click)="doQuery()">查询</button>
+      <button nz-button (click)="doReset()">重置</button>
+    </div>
+  </div>
+</div>

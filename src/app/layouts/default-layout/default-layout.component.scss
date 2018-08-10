@@ -43,6 +43,22 @@
   }
 }
 
+:host ::ng-deep {
+
+  /**
+   * 查询和列表区域
+   */
+  .panel {
+    .title {
+      @include setHeightGroup(24px);
+      font-weight: bold;
+      color: $theme-color;
+    }
+    .content {
+      padding: 10px 0;
+    }
+  }
+}
 
 ::ng-deep{
   html, body {

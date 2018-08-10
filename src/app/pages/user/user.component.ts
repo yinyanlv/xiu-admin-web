@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 import {UserService} from './user.service';
+import {getPagination, getQueryParams, getSorts} from '../../common/utils';
 
 @Component({
   selector: 'app-user',
@@ -10,27 +11,47 @@ import {UserService} from './user.service';
 })
 export class UserComponent implements OnInit {
 
-  isVisible: boolean = false;
-  data: Array<any> = [];
+  gridData: any = {
+    list: [],
+    total: 0
+  };
+  isEditVisible: boolean = false;
+  editData: any = {};
 
-  constructor(private userService: UserService) { }
+  constructor(
+    private userService: UserService
+  ) {
+  }
 
   ngOnInit() {
 
-    this.userService.getUsers().subscribe((res) => {
-      console.log(res);
+  }
+
+  doQuery(filters) {
+    let params = getQueryParams(filters, getSorts(), getPagination(1));
+
+    this.userService.queryPage(params).subscribe((res) => {
+      this.gridData = res;
+    }, (res: any) => {
+      this.userService.showError(res.message);
     });
   }
 
   createUser() {
-    this.isVisible = !this.isVisible;
+
+    this.editData = {
+      mode: 'create'
+    };
+
+    this.isEditVisible = true;
   }
 
-  handleOk(): void {
-    this.isVisible = false;
-  }
+  updateUser() {
 
-  handleCancel(): void {
-    this.isVisible = false;
+    this.editData = {
+      model: 'update',
+      record: {}
+    };
+    this.isEditVisible = true;
   }
 }

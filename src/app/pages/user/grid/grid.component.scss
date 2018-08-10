@@ -1,0 +1,25 @@
+@import "styles/scss/sdk";
+
+.grid-panel {
+
+  .options{
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+
+    button {
+      margin-right: 10px;
+    }
+  }
+
+  .table-wrapper{
+    width: 100%;
+    overflow: auto;
+  }
+}
+
+:host ::ng-deep{
+  table {
+    table-layout: fixed;
+  }
+}

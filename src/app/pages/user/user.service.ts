@@ -5,8 +5,9 @@ import {Observable} from 'rxjs';
 @Injectable()
 export class UserService extends BaseHttp {
 
-  getUsers(): Observable<any> {
-    return this.http.get('http://localhost:8086/user/get-users');
+  queryPage(queryString): Observable<any> {
+
+    return this.http.get(encodeURI(this.apiPrefix + '/user/page' + queryString));
   }
 }
 
