@@ -1,57 +1,52 @@
 import {Component, OnInit} from '@angular/core';
 
-import {UserService} from './user.service';
-import {getPagination, getQueryParams, getSorts} from '../../common/utils';
+import {Observable, Subject} from 'rxjs';
 
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
-  styleUrls: ['./user.component.scss'],
-  providers: [UserService]
+  styleUrls: ['./user.component.scss']
 })
 export class UserComponent implements OnInit {
 
-  gridData: any = {
-    list: [],
-    total: 0
-  };
-  isEditVisible: boolean = false;
-  editData: any = {};
+  private gridSubject: Subject<any> = new Subject<any>();
+  gridData$: Observable<any>;
+
+  private editSubject: Subject<any> = new Subject<any>();
+  editData$: Observable<any>;
 
   constructor(
-    private userService: UserService
   ) {
   }
 
   ngOnInit() {
 
+    this.gridData$ = this.gridSubject.asObservable();
+    this.editData$ = this.editSubject.asObservable();
   }
 
   doQuery(filters) {
-    let params = getQueryParams(filters, getSorts(), getPagination(1));
 
-    this.userService.queryPage(params).subscribe((res) => {
-      this.gridData = res;
-    }, (res: any) => {
-      this.userService.showError(res.message);
-    });
+    this.gridSubject.next(filters);
   }
 
   createUser() {
 
-    this.editData = {
-      mode: 'create'
-    };
-
-    this.isEditVisible = true;
+    this.editSubject.next({
+      isVisible: true,
+      isCreateMode: true,
+      data: null
+    });
   }
 
-  updateUser() {
+  updateUser(data) {
 
-    this.editData = {
-      model: 'update',
-      record: {}
-    };
-    this.isEditVisible = true;
+    this.editSubject.next({
+      isVisible: true,
+      isCreateMode: false,
+      data: data
+    });
   }
+
+
 }

@@ -1,5 +1,5 @@
 <nz-card>
   <user-query (onQuery)="doQuery($event)"></user-query>
-  <user-grid [data]="gridData" (onCreate)="createUser()" (onUpdate)="updateUser()"></user-grid>
+  <user-grid [data$]="gridData$" (onCreate)="createUser()" (onUpdate)="updateUser($event)"></user-grid>
 </nz-card>
-<user-edit [data]="editData" [isVisible]="isEditVisible"></user-edit>
+<user-edit [data$]="editData$"></user-edit>

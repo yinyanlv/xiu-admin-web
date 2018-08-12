@@ -6,9 +6,9 @@ import {NgZorroAntdModule} from 'ng-zorro-antd';
 
 import {routing} from './user.routing';
 import {UserComponent} from './user.component';
-import { QueryComponent } from './query/query.component';
-import { GridComponent } from './grid/grid.component';
-import { EditComponent } from './edit/edit.component';
+import {QueryComponent} from './query/query.component';
+import {GridComponent} from './grid/grid.component';
+import {EditComponent} from './edit/edit.component';
 
 @NgModule({
   imports: [
@@ -24,8 +24,6 @@ import { EditComponent } from './edit/edit.component';
     QueryComponent,
     GridComponent,
     EditComponent
-  ],
-  providers: [
   ]
 })
 export class UserModule {

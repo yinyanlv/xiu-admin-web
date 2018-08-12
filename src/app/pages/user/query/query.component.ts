@@ -1,4 +1,4 @@
-import {Component, OnInit, EventEmitter, Output} from '@angular/core';
+import {Component, OnInit, EventEmitter, Output, ChangeDetectionStrategy} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 
 import {getFilters} from '../../../common/utils';
@@ -7,7 +7,8 @@ import {SelectService} from '../../../services/SelectService';
 @Component({
   selector: 'user-query',
   templateUrl: './query.component.html',
-  styleUrls: ['./query.component.scss']
+  styleUrls: ['./query.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class QueryComponent implements OnInit {
 

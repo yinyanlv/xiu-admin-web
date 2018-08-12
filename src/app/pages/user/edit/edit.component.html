@@ -1,4 +1,4 @@
-<nz-modal [(nzVisible)]="isVisible" nzTitle="新建用户" nzWidth="700" class="edit-modal" nzOkText="保存" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+<nz-modal [(nzVisible)]="isVisible" nzTitle="{{title}}" nzWidth="700" class="edit-modal" nzOkText="保存" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
   <form nz-form [nzLayout]="'inline'" [formGroup]="form">
     <input *ngIf="!isCreateMode" type="hidden" formControlName="id">
     <nz-form-item>
@@ -15,14 +15,14 @@
         <nz-form-explain *ngIf="form.get('nickname').dirty && form.get('nickname').errors">用户昵称是必填项</nz-form-explain>
       </nz-form-control>
     </nz-form-item>
-    <nz-form-item>
+    <nz-form-item *ngIf="isCreateMode">
       <nz-form-label nzRequired>密码</nz-form-label>
       <nz-form-control>
         <input nz-input formControlName="password" placeholder="请输入密码" type="password" autocomplete="off">
         <nz-form-explain *ngIf="form.get('password').dirty && form.get('password').errors">密码是必填项</nz-form-explain>
       </nz-form-control>
     </nz-form-item>
-    <nz-form-item>
+    <nz-form-item *ngIf="isCreateMode">
       <nz-form-label nzRequired>确认密码</nz-form-label>
       <nz-form-control>
         <input nz-input formControlName="confirmPassword" placeholder="请输入密码" type="password" autocomplete="off">

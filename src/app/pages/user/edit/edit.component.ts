@@ -1,37 +1,42 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
 import {FormGroup, FormBuilder, Form, Validators} from '@angular/forms';
 
 import {EditService} from './edit.service';
 import {SelectService} from '../../../services/SelectService';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'user-edit',
   templateUrl: './edit.component.html',
   styleUrls: ['./edit.component.scss'],
-  providers: [EditService]
+  providers: [EditService],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EditComponent implements OnInit {
 
-  @Input()
-  isVisible: boolean;
-  isCreateMode: boolean = true;
   roles: Array<any>;
   statuses: Array<any>;
   form: FormGroup;
+  isVisible: boolean = false;
+  isCreateMode: boolean = true;
+  private data: any = null;
+
+  get title() {
+    return this.isCreateMode ? '新建用户' : '修改用户';
+  }
 
   @Input()
-  data: any;
+  data$: Observable<any>;
 
   constructor(
     private fb: FormBuilder,
+    private cdRef: ChangeDetectorRef,
     private editService: EditService,
     private selectService: SelectService
   ) {
   }
 
   ngOnInit() {
-
-    this.isCreateMode = this.data.model !== 'update';
 
     this.selectService.getUserRoles().subscribe((res: any) => {
       this.roles = res.data;
@@ -41,26 +46,14 @@ export class EditComponent implements OnInit {
       this.statuses = res.data;
     });
 
-    let initialData;
+    this.data$.subscribe((data) => {
+      this.isVisible = data.isVisible;
+      this.isCreateMode = data.isCreateMode;
+      this.data = data.data;
 
-    if (this.isCreateMode || !this.data) {
+      const record = this.data;
 
-      initialData = {
-        username: [null, [Validators.required]],
-        nickname: [null],
-        password: [null, [Validators.required]],
-        confirmPassword: [null, [Validators.required]],
-        role: [null, [Validators.required]],
-        status: [null, [Validators.required]],
-        email: [null, [Validators.required]],
-        phone: [null],
-        qq: [null]
-      };
-    } else {
-
-      let record = this.data.record;
-
-      initialData = {
+      const initialData = {
         id: [record.id, [Validators.required]],
         username: [record.username, [Validators.required]],
         nickname: [record.nickname],
@@ -70,14 +63,27 @@ export class EditComponent implements OnInit {
         phone: [record.phone],
         qq: [record.qq]
       };
-    }
 
-    this.form = this.fb.group(initialData);
+      this.form = this.fb.group(initialData);
+
+      this.cdRef.detectChanges();
+    });
+
+    this.form = this.fb.group({
+      username: [null, [Validators.required]],
+      nickname: [null],
+      password: [null, [Validators.required]],
+      confirmPassword: [null, [Validators.required]],
+      role: [null, [Validators.required]],
+      status: [null, [Validators.required]],
+      email: [null, [Validators.required]],
+      phone: [null],
+      qq: [null]
+    });
   }
 
   handleOk(): void {
 
-    debugger;
     if (this.form.valid) {
 
       let params = this.getParams();
@@ -86,15 +92,18 @@ export class EditComponent implements OnInit {
 
         this.editService.create(params).subscribe((res) => {
 
+          this.isVisible = false;
         });
       } else {
 
         this.editService.update(params).subscribe((res) => {
 
+          this.isVisible = false;
         });
       }
     }
   }
+
 
   handleCancel(): void {
     this.isVisible = false;
