@@ -12,8 +12,11 @@ export class GridService extends BaseHttp {
   }
 
   delete(ids) {
-    return this.http.delete(this.apiPrefix + '/user/delete', {
-      params: ids,
+    return this.http.request('delete', this.apiPrefix + '/user/delete', {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: ids,
       withCredentials: true
     });
   }

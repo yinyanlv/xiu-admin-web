@@ -25,4 +25,12 @@ export class BaseHttp {
       this.messageService.error(message);
     }
   }
+
+  showSuccess(message, callback?: Function) {
+
+    if (message) {
+
+      this.messageService.success(message);
+    }
+  }
 }

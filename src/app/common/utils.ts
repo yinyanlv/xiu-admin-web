@@ -39,17 +39,28 @@ export function getFilters(data: Object): Array<any> {
   return filters;
 }
 
-export function getSorts(): Array<any> {
+export function getSorts(sort: any): Array<any> {
 
   const sorts = [];
+
+  if (sort.value === 'descend') {
+    sorts.push({
+      field: sort.key,
+      desc: true
+    });
+  } else if (sort.value === 'ascend') {
+    sorts.push({
+      field: sort.key
+    });
+  }
 
   return sorts;
 }
 
-export function getPagination(page: number): Object {
+export function getPagination(page: number, size: number): Object {
 
   return {
     page,
-    size: 20
+    size
   };
 }

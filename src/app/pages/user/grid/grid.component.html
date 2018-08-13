@@ -8,17 +8,28 @@
       <button nz-button (click)="update()" *ngIf="isShowEdit">
         <i class="anticon anticon-edit"></i><span>修改</span>
       </button>
-      <button nz-button nzType="danger" *ngIf="isShowDelete" (click)="delete()">
+      <button nz-button nzType="danger" *ngIf="isShowDelete" nz-popconfirm nzTitle="您确定要删除这些用户?" (nzOnConfirm)="delete()">
         <i class="anticon anticon-delete"></i><span>删除</span>
       </button>
     </div>
     <div class="table-wrapper">
-      <nz-table #nzTable [nzData]="list" [nzPageSize]="size" [nzLoading]="isLoading">
-        <thead (nzSortChange)="sortChange($event)">
+      <nz-table #nzTable
+                [nzData]="list"
+                [nzPageSize]="size"
+                [nzTotal]="total"
+                [nzPageIndex]="pageIndex"
+                [nzLoading]="isLoading"
+                (nzPageIndexChange)="pageIndexChange($event)"
+                (nzPageSizeChange)="pageSizeChange($event)"
+                [nzFrontPagination]="false"
+                [nzShowPagination]="true"
+                [nzShowSizeChanger]="true"
+                [nzShowQuickJumper]="true">
+        <thead (nzSortChange)="sortChange($event)" nzSingleSort>
         <tr>
           <th nzShowCheckbox [nzChecked]="allChecked" (nzCheckedChange)="checkAll($event)"></th>
           <th nzShowSort nzSortKey="username" nzWidth="100px">用户名</th>
-            <th nzShowSort nzSortKey="nickname" nzWidth="120px">用户昵称</th>
+          <th nzShowSort nzSortKey="nickname" nzWidth="120px">用户昵称</th>
           <th nzShowSort nzSortKey="role" nzWidth="100px">角色</th>
           <th nzShowSort nzSortKey="status" nzWidth="100px">状态</th>
           <th nzShowSort nzSortKey="email" nzWidth="120px">邮箱</th>

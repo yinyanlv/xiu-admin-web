@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, Output, EventEmitter, ChangeDetectionStrategy, ChangeDetectorRef, NgZone} from '@angular/core';
+import {Component, Input, OnInit, Output, EventEmitter, ChangeDetectionStrategy, ChangeDetectorRef} from '@angular/core';
 import {getPagination, getQueryParams, getSorts} from '../../../common/utils';
 
 import {GridService} from './grid.service';
@@ -19,9 +19,13 @@ export class GridComponent implements OnInit {
   isShowEdit: boolean = false;
   isShowDelete: boolean = false;
   isLoading: boolean = false;
-  size: number = 20;
+  pageIndex: number = 1;
+  size: number = 10;
+  total: number = 0;
   data: any;
   list: Array<any> = [];
+  private sorts: Array<any> = [];
+  private filters: Array<any> = [];
 
   @Input()
   data$: Observable<any>;
@@ -33,7 +37,6 @@ export class GridComponent implements OnInit {
   onUpdate: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(
-    private ngZone: NgZone,
     private cdRef: ChangeDetectorRef,
     private gridService: GridService
   ) {
@@ -42,14 +45,37 @@ export class GridComponent implements OnInit {
   ngOnInit() {
 
     this.data$.subscribe((data) => {
-
       this.query(data);
     });
   }
 
   query(filters) {
+    this.filters = filters;
+    this.doQuery();
+  }
 
-    const params = getQueryParams(filters, getSorts(), getPagination(1));
+  sortChange(sort) {
+    this.sorts = getSorts(sort);
+    this.doQuery();
+  }
+
+  pageIndexChange(index) {
+    this.pageIndex = index;
+
+    if (this.pageIndex) {
+      this.doQuery();
+    } else {  // 初始化组件时，index默认传入0
+      this.pageIndex = 1;
+    }
+  }
+
+  pageSizeChange(size) {
+    this.size = size;
+    this.doQuery();
+  }
+
+  doQuery() {
+    const params = getQueryParams(this.filters, this.sorts, getPagination(this.pageIndex, this.size));
 
     this.isLoading = true;
     this.cdRef.detectChanges();
@@ -58,18 +84,15 @@ export class GridComponent implements OnInit {
 
       this.data = res;
       this.list = res.list || [];
+      this.total = res.total || 0;
 
       this.refreshStatus();
     }, (res: any) => {
       this.gridService.showError(res.message);
     }, () => {
       this.isLoading = false;
+      this.cdRef.detectChanges();
     });
-  }
-
-  sortChange(sorts) {
-
-    console.log(sorts);
   }
 
   create() {
@@ -87,7 +110,10 @@ export class GridComponent implements OnInit {
       return item.id;
     });
 
-    this.gridService.delete(ids).subscribe(() => {
+    this.gridService.delete(ids).subscribe((res: any) => {
+
+      this.gridService.showSuccess(res.message);
+      this.doQuery();
     });
   }
 

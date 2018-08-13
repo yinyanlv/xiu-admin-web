@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormGroup, FormBuilder, Form, Validators} from '@angular/forms';
 
 import {EditService} from './edit.service';
@@ -27,6 +27,9 @@ export class EditComponent implements OnInit {
 
   @Input()
   data$: Observable<any>;
+
+  @Output()
+  onSaved: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(
     private fb: FormBuilder,
@@ -97,19 +100,26 @@ export class EditComponent implements OnInit {
 
     if (this.form.valid) {
 
-      let params = this.getParams();
+      const params = this.getParams();
 
       if (this.isCreateMode) {
 
         this.editService.create(params).subscribe((res) => {
 
           this.isVisible = false;
+
+          this.onSaved.emit({
+            success: true
+          });
         });
       } else {
 
         this.editService.update(params).subscribe((res) => {
 
           this.isVisible = false;
+          this.onSaved.emit({
+            success: true
+          });
         });
       }
     }

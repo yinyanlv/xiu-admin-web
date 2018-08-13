@@ -1,6 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ComponentRef, OnInit, ViewChild} from '@angular/core';
 
 import {Observable, Subject} from 'rxjs';
+import {GridComponent} from './grid/grid.component';
 
 @Component({
   selector: 'app-user',
@@ -14,6 +15,9 @@ export class UserComponent implements OnInit {
 
   private editSubject: Subject<any> = new Subject<any>();
   editData$: Observable<any>;
+
+  @ViewChild('grid', {read: GridComponent})
+  grid: GridComponent;
 
   constructor(
   ) {
@@ -48,5 +52,10 @@ export class UserComponent implements OnInit {
     });
   }
 
+  saved(data) {
+    if (data.success) {
 
+      this.grid.doQuery();
+    }
+  }
 }
