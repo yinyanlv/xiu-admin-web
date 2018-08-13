@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, Output, EventEmitter, ChangeDetectionStrategy, ChangeDetectorRef} from '@angular/core';
+import {Component, Input, OnInit, Output, EventEmitter, ChangeDetectionStrategy, ChangeDetectorRef, NgZone} from '@angular/core';
 import {getPagination, getQueryParams, getSorts} from '../../../common/utils';
 
 import {GridService} from './grid.service';
@@ -16,12 +16,12 @@ import {Observable} from 'rxjs';
 export class GridComponent implements OnInit {
 
   allChecked: boolean = false;
-  indeterminate: boolean = false;
-  checkedLength: number = 0;
   isShowEdit: boolean = false;
   isShowDelete: boolean = false;
+  isLoading: boolean = false;
   size: number = 20;
   data: any;
+  list: Array<any> = [];
 
   @Input()
   data$: Observable<any>;
@@ -33,6 +33,7 @@ export class GridComponent implements OnInit {
   onUpdate: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(
+    private ngZone: NgZone,
     private cdRef: ChangeDetectorRef,
     private gridService: GridService
   ) {
@@ -48,15 +49,27 @@ export class GridComponent implements OnInit {
 
   query(filters) {
 
-    let params = getQueryParams(filters, getSorts(), getPagination(1));
+    const params = getQueryParams(filters, getSorts(), getPagination(1));
+
+    this.isLoading = true;
+    this.cdRef.detectChanges();
 
     this.gridService.queryPage(params).subscribe((res) => {
 
       this.data = res;
-      this.cdRef.markForCheck();
+      this.list = res.list || [];
+
+      this.refreshStatus();
     }, (res: any) => {
       this.gridService.showError(res.message);
+    }, () => {
+      this.isLoading = false;
     });
+  }
+
+  sortChange(sorts) {
+
+    console.log(sorts);
   }
 
   create() {
@@ -69,44 +82,6 @@ export class GridComponent implements OnInit {
     this.onUpdate.emit(this.getCheckedRows()[0]);
   }
 
-  checkAll(isChecked) {
-
-    this.data && this.data.list && this.data.list.forEach((item) => {
-
-      item.checked = isChecked;
-    });
-
-    this.refreshStatus();
-  }
-
-  checkRow(isChecked, record) {
-    record.checked = isChecked;
-    this.refreshStatus();
-  }
-
-  refreshStatus() {
-
-    const list = this.data && this.data.list && this.data.list || [];
-
-    const allChecked = list.every((item) => {
-      return !!item.checked;
-    });
-
-    const allUnchecked = list.every((item) => {
-      return !item.checked;
-    });
-
-    this.allChecked = allChecked;
-    this.indeterminate = !allChecked && !allUnchecked;
-    this.checkedLength = list.filter((item) => {
-      return item.checked;
-    }).length;
-    this.isShowEdit = this.checkedLength === 1;
-    this.isShowDelete = this.checkedLength > 0;
-
-    this.cdRef.markForCheck();
-  }
-
   delete() {
     const ids = this.getCheckedRows().map((item) => {
       return item.id;
@@ -116,12 +91,41 @@ export class GridComponent implements OnInit {
     });
   }
 
-  getCheckedRows() {
+  checkAll(isChecked) {
 
-    this.data && this.data.list && this.data.list.forEach((item) => {
-      return item.checked;
+    this.list.forEach((item) => {
+
+      item.checked = isChecked;
     });
 
-    return this.data.list;
+    this.refreshStatus();
+  }
+
+  checkRow(isChecked, row) {
+    row.checked = isChecked;
+
+    this.refreshStatus();
+  }
+
+  refreshStatus() {
+
+    this.allChecked = this.list.every((item) => {
+      return !!item.checked;
+    });
+
+    const checkedLength = this.getCheckedRows().length;
+    this.isShowEdit = checkedLength === 1;
+    this.isShowDelete = checkedLength > 0;
+
+    setTimeout(() => {
+      this.cdRef.detectChanges();
+    }, 0);
+  }
+
+  getCheckedRows() {
+
+    return this.list.filter((item) => {
+      return item.checked;
+    });
   }
 }

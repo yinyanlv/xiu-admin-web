@@ -13,26 +13,26 @@
       </button>
     </div>
     <div class="table-wrapper">
-      <nz-table #nzTable [nzData]="data && data.list" [nzPageSize]="size">
-        <thead>
+      <nz-table #nzTable [nzData]="list" [nzPageSize]="size" [nzLoading]="isLoading">
+        <thead (nzSortChange)="sortChange($event)">
         <tr>
-          <th nzShowCheckbox [(nzChecked)]="allChecked" [nzIndeterminate]="indeterminate" (nzCheckedChange)="checkAll($event)"></th>
-          <th nzShowSort nzWidth="100px">用户名</th>
-          <th nzShowSort nzWidth="120px">用户昵称</th>
-          <th nzShowSort nzWidth="100px">角色</th>
-          <th nzShowSort nzWidth="100px">状态</th>
-          <th nzShowSort nzWidth="120px">邮箱</th>
-          <th nzShowSort nzWidth="100px">手机</th>
-          <th nzShowSort nzWidth="100px">QQ</th>
-          <th nzShowSort nzWidth="140px">最后登录时间</th>
-          <th nzShowSort nzWidth="120px">创建人</th>
-          <th nzShowSort nzWidth="140px">创建时间</th>
-          <th nzShowSort nzWidth="140px">最后修改人</th>
-          <th nzShowSort nzWidth="140px">最后修改时间</th>
+          <th nzShowCheckbox [nzChecked]="allChecked" (nzCheckedChange)="checkAll($event)"></th>
+          <th nzShowSort nzSortKey="username" nzWidth="100px">用户名</th>
+            <th nzShowSort nzSortKey="nickname" nzWidth="120px">用户昵称</th>
+          <th nzShowSort nzSortKey="role" nzWidth="100px">角色</th>
+          <th nzShowSort nzSortKey="status" nzWidth="100px">状态</th>
+          <th nzShowSort nzSortKey="email" nzWidth="120px">邮箱</th>
+          <th nzShowSort nzSortKey="phone" nzWidth="100px">手机</th>
+          <th nzShowSort nzSortKey="qq" nzWidth="100px">QQ</th>
+          <th nzShowSort nzSortKey="lastLoginTime" nzWidth="140px">最后登录时间</th>
+          <th nzShowSort nzSortKey="createBy" nzWidth="120px">创建人</th>
+          <th nzShowSort nzSortKey="createTime" nzWidth="140px">创建时间</th>
+          <th nzShowSort nzSortKey="updateBy" nzWidth="120px">最后修改人</th>
+          <th nzShowSort nzSortKey="updateTime" nzWidth="140px">最后修改时间</th>
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let item of nzTable.data">
+        <tr *ngFor="let item of list">
           <td nzShowCheckbox [nzChecked]="!!item.checked" (nzCheckedChange)="checkRow($event, item)"></td>
           <td>{{item.username}}</td>
           <td>{{item.nickname}}</td>

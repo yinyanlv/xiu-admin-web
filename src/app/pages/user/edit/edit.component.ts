@@ -51,23 +51,19 @@ export class EditComponent implements OnInit {
       this.isCreateMode = data.isCreateMode;
       this.data = data.data;
 
-      const record = this.data;
-
-      const initialData = {
-        id: [record.id, [Validators.required]],
-        username: [record.username, [Validators.required]],
-        nickname: [record.nickname],
-        role: [record.role, [Validators.required]],
-        status: [record.status, [Validators.required]],
-        email: [record.email, [Validators.required]],
-        phone: [record.phone],
-        qq: [record.qq]
-      };
-
-      this.form = this.fb.group(initialData);
+      if (this.isCreateMode) {
+        this.initCreateForm();
+      } else {
+        this.initUpdateForm();
+      }
 
       this.cdRef.detectChanges();
     });
+
+    this.initCreateForm();
+  }
+
+  initCreateForm() {
 
     this.form = this.fb.group({
       username: [null, [Validators.required]],
@@ -79,6 +75,21 @@ export class EditComponent implements OnInit {
       email: [null, [Validators.required]],
       phone: [null],
       qq: [null]
+    });
+  }
+
+  initUpdateForm() {
+    const record = this.data;
+
+    this.form = this.fb.group({
+      id: [record.id, [Validators.required]],
+      username: [record.username, [Validators.required]],
+      nickname: [record.nickname],
+      role: [record.role, [Validators.required]],
+      status: [record.status, [Validators.required]],
+      email: [record.email, [Validators.required]],
+      phone: [record.phone],
+      qq: [record.qq]
     });
   }
 
