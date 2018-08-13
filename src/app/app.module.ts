@@ -11,6 +11,8 @@ import {LayoutsModule} from './layouts/layouts.module';
 import {routing} from './app.routing';
 import {NotFoundComponent} from './pages/not-found/not-found.component';
 import {SelectService} from './services/SelectService';
+import {RouteReuseStrategy} from '@angular/router';
+import {AppRouteReuseStrategy} from './common/app-route-reuse-strategy';
 
 registerLocaleData(zh);
 
@@ -30,7 +32,10 @@ registerLocaleData(zh);
   providers: [{
       provide: NZ_I18N,
       useValue: zh_CN
-    },
+  }, {
+    provide: RouteReuseStrategy,
+    useClass: AppRouteReuseStrategy
+  },
     SelectService
   ],
   bootstrap: [AppComponent]
