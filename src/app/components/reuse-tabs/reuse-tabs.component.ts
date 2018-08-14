@@ -87,9 +87,7 @@ export class ReuseTabsComponent implements OnInit {
 
     this.tabs.splice(activeIndex, 1);
 
-    debugger;
-
-    delete AppRouteReuseStrategy.handles[nextActiveTab.url.replace(/\//g, '_')];
+    delete AppRouteReuseStrategy.handles[tab.url.replace(/\//g, '_')];
 
     this.activeIndex = this.tabs.findIndex((item) => {
       return item === nextActiveTab;
