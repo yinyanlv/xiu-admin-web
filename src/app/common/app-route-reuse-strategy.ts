@@ -16,7 +16,7 @@ export class AppRouteReuseStrategy implements RouteReuseStrategy {
   }
 
   // 当路由离开时触发，缓存该分离的路由，可通过赋值null，来清除之前缓存的路由
-  store(route: ActivatedRouteSnapshot, handle: DetachedRouteHandle | null): void {  // route，之前的路由
+  store(route: ActivatedRouteSnapshot, handle: DetachedRouteHandle): void {  // route，之前的路由
 
     // 缓存路由
     AppRouteReuseStrategy.handles[this.getKey(route)] = handle;

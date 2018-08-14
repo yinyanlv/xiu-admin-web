@@ -2,7 +2,7 @@ import {ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Inp
 import {FormGroup, FormBuilder, Form, Validators} from '@angular/forms';
 
 import {EditService} from './edit.service';
-import {SelectService} from '../../../services/SelectService';
+import {SelectService} from '../../../services/select.service';
 import {Observable} from 'rxjs';
 
 @Component({

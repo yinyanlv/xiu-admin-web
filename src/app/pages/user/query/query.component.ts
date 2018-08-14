@@ -2,7 +2,7 @@ import {Component, OnInit, EventEmitter, Output, ChangeDetectionStrategy} from '
 import {FormBuilder, FormGroup} from '@angular/forms';
 
 import {getFilters} from '../../../common/utils';
-import {SelectService} from '../../../services/SelectService';
+import {SelectService} from '../../../services/select.service';
 
 @Component({
   selector: 'user-query',
@@ -28,7 +28,7 @@ export class QueryComponent implements OnInit {
   ngOnInit() {
 
     this.selectService.getUserRoles().subscribe((res: any) => {
-      let list = res.data;
+      const list = res.data;
       list.unshift({
         code: '',
         name: '全部'
@@ -37,7 +37,7 @@ export class QueryComponent implements OnInit {
     });
 
     this.selectService.getUserStatuses().subscribe((res: any) => {
-      let list = res.data;
+      const list = res.data;
       list.unshift({
         code: '',
         name: '全部'
