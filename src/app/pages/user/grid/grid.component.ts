@@ -145,7 +145,7 @@ export class GridComponent implements OnInit {
 
     setTimeout(() => {
       this.cdRef.detectChanges();
-    }, 0);
+    });
   }
 
   getCheckedRows() {

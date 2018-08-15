@@ -46,6 +46,6 @@ export class AppRouteReuseStrategy implements RouteReuseStrategy {
 
   private getKey(route) {
 
-    return route._routerState.url.replace(/\//g, '_');
+    return route['_routerState'].url.replace(/\//g, '_');
   }
 }

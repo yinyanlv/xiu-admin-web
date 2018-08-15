@@ -14,18 +14,13 @@ const routes: Routes = [{
     redirectTo: 'analysis'
   }, {
     path: 'analysis',
-    loadChildren: './pages/analysis/analysis.module#AnalysisModule',
-    data: {
-      title: '统计分析',
-      code: 'analysis'
-    }
+    loadChildren: './pages/analysis/analysis.module#AnalysisModule'
+  }, {
+    path: 'log',
+    loadChildren: './pages/log/log.module#LogModule'
   }, {
     path: 'user',
-    loadChildren: './pages/user/user.module#UserModule',
-    data: {
-      title: '用户管理',
-      code: 'user'
-    }
+    loadChildren: './pages/user/user.module#UserModule'
   }]
 }, {
   path: '',

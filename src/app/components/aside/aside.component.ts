@@ -24,7 +24,7 @@ export class AsideComponent implements OnInit {
 
   ngOnInit() {
 
-    const url = this.activatedRoute.snapshot._routerState.url;
+    const url = this.activatedRoute.snapshot['_routerState'].url;
 
     this.selectMenuItem(url, true);
 
@@ -33,7 +33,7 @@ export class AsideComponent implements OnInit {
         return event instanceof NavigationEnd;
       }))
       .subscribe((event) => {
-        this.selectMenuItem(event.url);
+        this.selectMenuItem(event['url'], false);
       });
   }
 

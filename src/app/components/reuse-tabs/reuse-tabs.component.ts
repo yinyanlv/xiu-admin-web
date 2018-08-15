@@ -34,7 +34,7 @@ export class ReuseTabsComponent implements OnInit {
 
   ngOnInit() {
 
-    const url = this.activatedRoute.snapshot._routerState.url;
+    const url = this.activatedRoute.snapshot['_routerState'].url;
 
     this.tabs.push(this.getTabData(url));
 
@@ -44,7 +44,7 @@ export class ReuseTabsComponent implements OnInit {
       }))
       .pipe(map(() => this.activatedRoute))
       .pipe(map((route) => {
-        return route.snapshot._routerState.url;
+        return route.snapshot['_routerState'].url;
       }))
       .subscribe((url: string) => {
         const index = this.tabs.findIndex((item) => {
@@ -55,6 +55,7 @@ export class ReuseTabsComponent implements OnInit {
           this.activeIndex = index;
         } else {
           this.tabs.push(this.getTabData(url));
+          this.activeIndex++;
         }
       });
   }
@@ -71,7 +72,7 @@ export class ReuseTabsComponent implements OnInit {
       });
     });
 
-    return data;
+    return <Tab>data;
   }
 
   closeTab(tab: Tab): void {
@@ -87,21 +88,19 @@ export class ReuseTabsComponent implements OnInit {
 
     this.tabs.splice(activeIndex, 1);
 
-    delete AppRouteReuseStrategy.handles[tab.url.replace(/\//g, '_')];
-
     this.activeIndex = this.tabs.findIndex((item) => {
       return item === nextActiveTab;
     });
 
     this.router.navigate([nextActiveTab.url]);
+
+    setTimeout(() => {
+      delete AppRouteReuseStrategy.handles[tab.url.replace(/\//g, '_')];
+    });
   }
 
-  activateTab(tab: Tab) {
+  activateTab(index: number) {
 
-    this.activeIndex = this.tabs.findIndex((item) => {
-      return item === tab;
-    });
-
-    this.router.navigate([tab.url]);
+    this.router.navigate([this.tabs[index].url]);
   }
 }
