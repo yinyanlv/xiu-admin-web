@@ -112,7 +112,7 @@ export class GridComponent implements OnInit {
 
     this.gridService.delete(ids).subscribe((res: any) => {
 
-      this.gridService.showSuccess(res.message);
+      this.gridService.showSuccess(res.data);
       this.doQuery();
     });
   }

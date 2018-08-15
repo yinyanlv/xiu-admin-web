@@ -6,6 +6,7 @@
       <nz-form-control [ngClass]="{'has-error': isHasError('username')}">
         <input nz-input formControlName="username" placeholder="请输入用户名">
         <nz-form-explain *ngIf="checkError('username', 'required')">用户名是必填项</nz-form-explain>
+        <nz-form-explain *ngIf="checkError('username', 'pattern')">用户名只能由字母、数字和下划线组成</nz-form-explain>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
@@ -18,7 +19,7 @@
     <nz-form-item *ngIf="isCreateMode">
       <nz-form-label nzRequired>密码</nz-form-label>
       <nz-form-control [ngClass]="{'has-error': isHasError('password')}">
-        <input nz-input formControlName="password" placeholder="请输入密码" type="password" autocomplete="off">
+        <input nz-input formControlName="password" placeholder="请输入密码" type="password" autocomplete="off" (ngModelChange)="checkConfirm()">
         <nz-form-explain *ngIf="checkError('password', 'required')">密码是必填项</nz-form-explain>
         <nz-form-explain *ngIf="checkError('password', 'minlength')">密码最少6位</nz-form-explain>
         <nz-form-explain *ngIf="checkError('password', 'maxlength')">密码最多20位</nz-form-explain>
@@ -31,7 +32,7 @@
         <nz-form-explain *ngIf="checkError('confirmPassword', 'required')">确认密码是必填项</nz-form-explain>
         <nz-form-explain *ngIf="checkError('confirmPassword', 'minlength')">密码最少6位</nz-form-explain>
         <nz-form-explain *ngIf="checkError('confirmPassword', 'maxlength')">密码最多20位</nz-form-explain>
-        <nz-form-explain *ngIf="checkError('confirmPassword', 'equalTo')">两次输入的密码不一致</nz-form-explain>
+        <nz-form-explain *ngIf="checkError('confirmPassword', 'confirm')">两次输入的密码不一致</nz-form-explain>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
@@ -57,18 +58,21 @@
       <nz-form-control [ngClass]="{'has-error': isHasError('email')}">
         <input nz-input formControlName="email" placeholder="请输入邮箱">
         <nz-form-explain *ngIf="checkError('email', 'required')">邮箱是必填项</nz-form-explain>
+        <nz-form-explain *ngIf="checkError('email', 'pattern')">邮箱格式不正确</nz-form-explain>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
       <nz-form-label>手机</nz-form-label>
-      <nz-form-control>
-        <input nz-input formControlName="phone" placeholder="请输入手机">
+      <nz-form-control [ngClass]="{'has-error': isHasError('phone')}">
+        <input nz-input formControlName="phone" placeholder="请输入手机号">
+        <nz-form-explain *ngIf="checkError('phone', 'pattern')">手机号格式不正确</nz-form-explain>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
       <nz-form-label>QQ</nz-form-label>
-      <nz-form-control>
-        <input nz-input formControlName="qq" placeholder="请输入QQ">
+      <nz-form-control [ngClass]="{'has-error': isHasError('qq')}">
+        <input nz-input formControlName="qq" placeholder="请输入QQ号">
+        <nz-form-explain *ngIf="checkError('qq', 'pattern')">QQ号格式不正确</nz-form-explain>
       </nz-form-control>
     </nz-form-item>
   </form>

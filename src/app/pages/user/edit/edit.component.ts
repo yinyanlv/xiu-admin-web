@@ -1,13 +1,10 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormGroup, FormBuilder, FormControl, Validators} from '@angular/forms';
-import {CustomValidators} from 'ng2-validation';
+import {Observable} from 'rxjs';
 
 import {EditService} from './edit.service';
 import {SelectService} from '../../../services/select.service';
-import {Observable} from 'rxjs';
-
-const password = new FormControl(null, [Validators.required, Validators.minLength(6), Validators.maxLength(20)]);
-const confirmPassword = new FormControl(null, [Validators.required, Validators.minLength(6), Validators.maxLength(20), CustomValidators.equalTo(password)]);
+import {USERNAME_REGEX, EMAIL_REGEX, PHONE_REGEX, QQ_REGEX} from '../../../common/regex';
 
 @Component({
   selector: 'user-edit',
@@ -73,15 +70,15 @@ export class EditComponent implements OnInit {
   initCreateForm() {
 
     this.form = this.fb.group({
-      username: [null, [Validators.required]],
+      username: [null, [Validators.required, Validators.pattern(USERNAME_REGEX)]],
       nickname: [null, [Validators.required]],
-      password: password,
-      confirmPassword: confirmPassword,
+      password: [null, [Validators.required, Validators.minLength(6), Validators.maxLength(20)]],
+      confirmPassword: [null, [this.confirmValidator.bind(this)]],
       role: [null, [Validators.required]],
       status: [null, [Validators.required]],
-      email: [null, [Validators.required]],
-      phone: [null],
-      qq: [null]
+      email: [null, [Validators.required, Validators.pattern(EMAIL_REGEX)]],
+      phone: [null, [Validators.pattern(PHONE_REGEX)]],
+      qq: [null, [Validators.pattern(QQ_REGEX)]]
     });
   }
 
@@ -89,15 +86,41 @@ export class EditComponent implements OnInit {
     const record = this.data;
 
     this.form = this.fb.group({
-      id: [record.id, [Validators.required]],
+      id: [record.id, [Validators.required, Validators.pattern(USERNAME_REGEX)]],
       username: [record.username, [Validators.required]],
       nickname: [record.nickname, [Validators.required]],
       role: [record.role, [Validators.required]],
       status: [record.status, [Validators.required]],
-      email: [record.email, [Validators.required]],
-      phone: [record.phone],
-      qq: [record.qq]
+      email: [record.email, [Validators.required, Validators.pattern(EMAIL_REGEX)]],
+      phone: [record.phone, [Validators.pattern(PHONE_REGEX)]],
+      qq: [record.qq, [Validators.pattern(QQ_REGEX)]]
     });
+  }
+
+  checkConfirm() {
+    Promise.resolve().then(() => this.form.get('confirmPassword').updateValueAndValidity());
+  }
+
+  confirmValidator(control: FormControl): {[key: string]: boolean} {
+    const value = control.value;
+
+    if (!value) {
+      return {
+        required: true
+      };
+    } else if (value.length < 6) {
+      return {
+        minlength: true
+      };
+    } else if (value.length > 20) {
+      return {
+        maxlength: true
+      };
+    } else if (value !== this.form.get('password').value) {
+      return {
+        confirm: true
+      };
+    }
   }
 
   handleOk(): void {
@@ -111,10 +134,10 @@ export class EditComponent implements OnInit {
         this.editService.create(params).subscribe((res) => {
 
           this.isVisible = false;
-
           this.onSaved.emit({
             success: true
           });
+          this.editService.showSuccess(res.data);
         });
       } else {
 
@@ -124,6 +147,7 @@ export class EditComponent implements OnInit {
           this.onSaved.emit({
             success: true
           });
+          this.editService.showSuccess(res.data);
         });
       }
     } else {
