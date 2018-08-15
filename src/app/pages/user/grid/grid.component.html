@@ -54,9 +54,9 @@
           <td>{{item.qq}}</td>
           <td>{{item.lastLoginTime}}</td>
           <td>{{item.createBy}}</td>
-          <td>{{item.createTime}}</td>
+          <td>{{item.createTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
           <td>{{item.updateBy}}</td>
-          <td>{{item.updateTime}}</td>
+          <td>{{item.updateTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
         </tr>
         </tbody>
       </nz-table>

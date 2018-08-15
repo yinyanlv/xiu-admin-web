@@ -1,16 +1,20 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {FormGroup, FormBuilder, Form, Validators} from '@angular/forms';
+import {FormGroup, FormBuilder, FormControl, Validators} from '@angular/forms';
+import {CustomValidators} from 'ng2-validation';
 
 import {EditService} from './edit.service';
 import {SelectService} from '../../../services/select.service';
 import {Observable} from 'rxjs';
+
+const password = new FormControl(null, [Validators.required, Validators.minLength(6), Validators.maxLength(20)]);
+const confirmPassword = new FormControl(null, [Validators.required, Validators.minLength(6), Validators.maxLength(20), CustomValidators.equalTo(password)]);
 
 @Component({
   selector: 'user-edit',
   templateUrl: './edit.component.html',
   styleUrls: ['./edit.component.scss'],
   providers: [EditService],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EditComponent implements OnInit {
 
@@ -70,9 +74,9 @@ export class EditComponent implements OnInit {
 
     this.form = this.fb.group({
       username: [null, [Validators.required]],
-      nickname: [null],
-      password: [null, [Validators.required]],
-      confirmPassword: [null, [Validators.required]],
+      nickname: [null, [Validators.required]],
+      password: password,
+      confirmPassword: confirmPassword,
       role: [null, [Validators.required]],
       status: [null, [Validators.required]],
       email: [null, [Validators.required]],
@@ -87,7 +91,7 @@ export class EditComponent implements OnInit {
     this.form = this.fb.group({
       id: [record.id, [Validators.required]],
       username: [record.username, [Validators.required]],
-      nickname: [record.nickname],
+      nickname: [record.nickname, [Validators.required]],
       role: [record.role, [Validators.required]],
       status: [record.status, [Validators.required]],
       email: [record.email, [Validators.required]],
@@ -122,9 +126,17 @@ export class EditComponent implements OnInit {
           });
         });
       }
+    } else {
+
+      Object.keys(this.form.controls).forEach((key) => {
+        const control = this.form.get(key);
+
+        control.markAsTouched();
+        control.markAsDirty();
+        control.updateValueAndValidity();
+      });
     }
   }
-
 
   handleCancel(): void {
     this.isVisible = false;
@@ -133,5 +145,18 @@ export class EditComponent implements OnInit {
   getParams() {
 
     return this.form.value;
+  }
+
+  isHasError(name: string): boolean {
+    const control = this.form.get(name);
+
+    return !!(control.touched && control.dirty && this.form.get(name).errors);
+  }
+
+  checkError(name: string, type: string): boolean {
+
+    const control = this.form.get(name);
+
+    return control.touched && control.dirty && control.hasError(type);
   }
 }
