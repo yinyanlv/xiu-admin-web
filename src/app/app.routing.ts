@@ -19,6 +19,9 @@ const routes: Routes = [{
     path: 'log',
     loadChildren: './pages/log/log.module#LogModule'
   }, {
+    path: 'category',
+    loadChildren: './pages/category/category.module#CategoryModule'
+  }, {
     path: 'user',
     loadChildren: './pages/user/user.module#UserModule'
   }]
