@@ -16,8 +16,9 @@ import {Observable} from 'rxjs';
 export class GridComponent implements OnInit {
 
   allChecked: boolean = false;
-  isShowEdit: boolean = false;
-  isShowDelete: boolean = false;
+  isEnableEdit: boolean = false;
+  isEnableModifyPassword: boolean = false;
+  isEnableDelete: boolean = false;
   isLoading: boolean = false;
   pageIndex: number = 1;
   size: number = 10;
@@ -35,6 +36,9 @@ export class GridComponent implements OnInit {
 
   @Output()
   onUpdate: EventEmitter<any> = new EventEmitter<any>();
+
+  @Output()
+  onModifyPassword: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(
     private cdRef: ChangeDetectorRef,
@@ -105,6 +109,10 @@ export class GridComponent implements OnInit {
     this.onUpdate.emit(this.getCheckedRows()[0]);
   }
 
+  modifyPassword() {
+    this.onModifyPassword.emit(this.getCheckedRows()[0].id);
+  }
+
   delete() {
     const ids = this.getCheckedRows().map((item) => {
       return item.id;
@@ -140,8 +148,9 @@ export class GridComponent implements OnInit {
     });
 
     const checkedLength = this.getCheckedRows().length;
-    this.isShowEdit = checkedLength === 1;
-    this.isShowDelete = checkedLength > 0;
+    this.isEnableEdit = checkedLength === 1;
+    this.isEnableModifyPassword = checkedLength === 1;
+    this.isEnableDelete = checkedLength > 0;
 
     setTimeout(() => {
       this.cdRef.detectChanges();

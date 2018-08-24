@@ -9,6 +9,7 @@ import {UserComponent} from './user.component';
 import {QueryComponent} from './query/query.component';
 import {GridComponent} from './grid/grid.component';
 import {EditComponent} from './edit/edit.component';
+import {ModifyPasswordComponent} from './modify-password/modify-password.component';
 
 @NgModule({
   imports: [
@@ -23,7 +24,8 @@ import {EditComponent} from './edit/edit.component';
     UserComponent,
     QueryComponent,
     GridComponent,
-    EditComponent
+    EditComponent,
+    ModifyPasswordComponent
   ]
 })
 export class UserModule {

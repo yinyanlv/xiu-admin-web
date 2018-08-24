@@ -16,6 +16,9 @@ export class UserComponent implements OnInit {
   private editSubject: Subject<any> = new Subject<any>();
   editData$: Observable<any>;
 
+  private modifyPasswordSubject: Subject<any> = new Subject<any>();
+  modifyPassword$: Observable<any>;
+
   @ViewChild('grid', {read: GridComponent})
   grid: GridComponent;
 
@@ -27,6 +30,7 @@ export class UserComponent implements OnInit {
 
     this.gridData$ = this.gridSubject.asObservable();
     this.editData$ = this.editSubject.asObservable();
+    this.modifyPassword$ = this.modifyPasswordSubject.asObservable();
   }
 
   doQuery(filters) {
@@ -52,7 +56,21 @@ export class UserComponent implements OnInit {
     });
   }
 
+  modifyPassoword(data) {
+    this.modifyPasswordSubject.next({
+      isVisible: true,
+      data: data
+    });
+  }
+
   saved(data) {
+    if (data.success) {
+
+      this.grid.doQuery();
+    }
+  }
+
+  modifiedPassword(data) {
     if (data.success) {
 
       this.grid.doQuery();
