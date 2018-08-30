@@ -133,21 +133,29 @@ export class EditComponent implements OnInit {
 
         this.editService.create(params).subscribe((res) => {
 
-          this.isVisible = false;
-          this.onSaved.emit({
-            success: true
-          });
-          this.editService.showSuccess(res.data);
+          if (res.success) {
+            this.isVisible = false;
+            this.onSaved.emit({
+              success: true
+            });
+            this.editService.showSuccess(res.data);
+          } else {
+            this.editService.showError(res.message);
+          }
         });
       } else {
 
         this.editService.update(params).subscribe((res) => {
 
-          this.isVisible = false;
-          this.onSaved.emit({
-            success: true
-          });
-          this.editService.showSuccess(res.data);
+          if (res.success) {
+            this.isVisible = false;
+            this.onSaved.emit({
+              success: true
+            });
+            this.editService.showSuccess(res.data);
+          } else {
+            this.editService.showError(res.message);
+          }
         });
       }
     } else {
