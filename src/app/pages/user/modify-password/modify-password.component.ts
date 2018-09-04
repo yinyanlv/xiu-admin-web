@@ -1,7 +1,7 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {FormGroup, FormControl, FormBuilder, Validators} from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
+import {FormControl, FormBuilder, Validators} from '@angular/forms';
 import {ModifyPasswordService} from './modify-password.service';
-import {Observable} from 'rxjs';
+import {BaseDialogFormComponent} from '../../../components/base-dialog-form/base-dialog-form.component';
 
 @Component({
   selector: 'user-modify-password',
@@ -11,21 +11,13 @@ import {Observable} from 'rxjs';
     ModifyPasswordService
   ]
 })
-export class ModifyPasswordComponent implements OnInit {
-
-  form: FormGroup;
-  isVisible: boolean = false;
-
-  @Input()
-  data$: Observable<any>;
-
-  @Output()
-  onSaved: EventEmitter<any> = new EventEmitter<any>();
+export class ModifyPasswordComponent extends BaseDialogFormComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
     private modifyPasswordService: ModifyPasswordService
   ) {
+    super();
   }
 
   ngOnInit() {
@@ -51,7 +43,7 @@ export class ModifyPasswordComponent implements OnInit {
     Promise.resolve().then(() => this.form.get('confirmPassword').updateValueAndValidity());
   }
 
-  confirmValidator(control: FormControl): {[key: string]: boolean} {
+  confirmValidator(control: FormControl): { [key: string]: boolean } {
     const value = control.value;
 
     if (!value) {
@@ -97,35 +89,7 @@ export class ModifyPasswordComponent implements OnInit {
       });
     } else {
 
-      Object.keys(this.form.controls).forEach((key) => {
-        const control = this.form.get(key);
-
-        control.markAsTouched();
-        control.markAsDirty();
-        control.updateValueAndValidity();
-      });
+      this.updateFormControls();
     }
-  }
-
-  handleCancel(): void {
-    this.isVisible = false;
-  }
-
-  getParams() {
-
-    return this.form.value;
-  }
-
-  isHasError(name: string): boolean {
-    const control = this.form.get(name);
-
-    return !!(control.touched && control.dirty && this.form.get(name).errors);
-  }
-
-  checkError(name: string, type: string): boolean {
-
-    const control = this.form.get(name);
-
-    return control.touched && control.dirty && control.hasError(type);
   }
 }

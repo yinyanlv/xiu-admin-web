@@ -7,17 +7,19 @@ import {NgZorroAntdModule} from 'ng-zorro-antd';
 import {HeaderComponent} from './header/header.component';
 import {ReuseTabsComponent} from './reuse-tabs/reuse-tabs.component';
 import {AsideComponent} from './aside/aside.component';
-import {QueryComponent} from './query/query.component';
-import {GridComponent} from './grid/grid.component';
-import {EditComponent} from './edit/edit.component';
+import {BaseQueryComponent} from './base-query/base-query.component';
+import {BaseGridComponent} from './base-grid/base-grid.component';
+import {BaseEditComponent} from './base-edit/base-edit.component';
+import {BaseDialogFormComponent} from './base-dialog-form/base-dialog-form.component';
 
 const components = [
   HeaderComponent,
   ReuseTabsComponent,
   AsideComponent,
-  QueryComponent,
-  GridComponent,
-  EditComponent
+  BaseQueryComponent,
+  BaseGridComponent,
+  BaseDialogFormComponent,
+  BaseEditComponent
 ];
 
 @NgModule({

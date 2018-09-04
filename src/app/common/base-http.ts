@@ -1,15 +1,12 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {NzMessageService} from 'ng-zorro-antd';
-import {Observable} from 'rxjs';
-
 import {environment} from '../../environments/environment';
 
 @Injectable()
 export class BaseHttp {
 
   protected apiPrefix: String = '';
-  protected observableCreator = Observable;
 
   constructor(
     protected http: HttpClient,
@@ -18,19 +15,19 @@ export class BaseHttp {
     this.apiPrefix = environment.apiPrefix;
   }
 
+  showSuccess(message: string, callback?: Function) {
+
+    if (message) {
+
+      this.messageService.success(message);
+    }
+  }
+
   showError(message: string, callback?: Function) {
 
     if (message) {
 
       this.messageService.error(message);
-    }
-  }
-
-  showSuccess(message, callback?: Function) {
-
-    if (message) {
-
-      this.messageService.success(message);
     }
   }
 }

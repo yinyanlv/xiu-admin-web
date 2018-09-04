@@ -1,9 +1,9 @@
-<nz-modal [(nzVisible)]="isVisible" nzTitle="{{title}}" nzWidth="700" class="edit-modal" nzOkText="保存" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+<nz-modal [(nzVisible)]="isVisible" nzTitle="{{dialogTitle}}" nzWidth="700" class="edit-modal" nzOkText="保存" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
   <form nz-form [nzLayout]="'inline'" [formGroup]="form">
     <input *ngIf="!isCreateMode" type="hidden" formControlName="id">
     <nz-form-item>
       <nz-form-label nzRequired>用户名</nz-form-label>
-      <nz-form-control [ngClass]="{'has-error': isHasError('username')}">
+      <nz-form-control [ngClass]="{'has-error': checkErrorStyle('username')}">
         <input nz-input formControlName="username" placeholder="请输入用户名">
         <nz-form-explain *ngIf="checkError('username', 'required')">用户名是必填项</nz-form-explain>
         <nz-form-explain *ngIf="checkError('username', 'pattern')">用户名只能由字母、数字和下划线组成</nz-form-explain>
@@ -11,14 +11,14 @@
     </nz-form-item>
     <nz-form-item>
       <nz-form-label nzRequired>用户昵称</nz-form-label>
-      <nz-form-control [ngClass]="{'has-error': isHasError('nickname')}">
+      <nz-form-control [ngClass]="{'has-error': checkErrorStyle('nickname')}">
         <input nz-input formControlName="nickname" placeholder="请输入用户昵称">
         <nz-form-explain *ngIf="checkError('nickname', 'required')">用户昵称是必填项</nz-form-explain>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item *ngIf="isCreateMode">
       <nz-form-label nzRequired>密码</nz-form-label>
-      <nz-form-control [ngClass]="{'has-error': isHasError('password')}">
+      <nz-form-control [ngClass]="{'has-error': checkErrorStyle('password')}">
         <input nz-input formControlName="password" placeholder="请输入密码" type="password" autocomplete="off" (ngModelChange)="checkConfirm()">
         <nz-form-explain *ngIf="checkError('password', 'required')">密码是必填项</nz-form-explain>
         <nz-form-explain *ngIf="checkError('password', 'minlength')">密码最少6位</nz-form-explain>
@@ -27,7 +27,7 @@
     </nz-form-item>
     <nz-form-item *ngIf="isCreateMode">
       <nz-form-label nzRequired>确认密码</nz-form-label>
-      <nz-form-control [ngClass]="{'has-error': isHasError('confirmPassword')}">
+      <nz-form-control [ngClass]="{'has-error': checkErrorStyle('confirmPassword')}">
         <input nz-input formControlName="confirmPassword" placeholder="请输入密码" type="password" autocomplete="off">
         <nz-form-explain *ngIf="checkError('confirmPassword', 'required')">确认密码是必填项</nz-form-explain>
         <nz-form-explain *ngIf="checkError('confirmPassword', 'minlength')">密码最少6位</nz-form-explain>
@@ -37,7 +37,7 @@
     </nz-form-item>
     <nz-form-item>
       <nz-form-label nzRequired>角色</nz-form-label>
-      <nz-form-control [ngClass]="{'has-error': isHasError('role')}">
+      <nz-form-control [ngClass]="{'has-error': checkErrorStyle('role')}">
         <nz-select nzPlaceHolder="请选择角色" formControlName="role">
           <nz-option *ngFor="let item of roles;" [nzValue]="item.code" [nzLabel]="item.name"></nz-option>
         </nz-select>
@@ -46,7 +46,7 @@
     </nz-form-item>
     <nz-form-item>
       <nz-form-label nzRequired>状态</nz-form-label>
-      <nz-form-control [ngClass]="{'has-error': isHasError('status')}">
+      <nz-form-control [ngClass]="{'has-error': checkErrorStyle('status')}">
         <nz-select nzPlaceHolder="请选择状态" formControlName="status">
           <nz-option *ngFor="let item of statuses;" [nzValue]="item.code" [nzLabel]="item.name"></nz-option>
         </nz-select>
@@ -55,7 +55,7 @@
     </nz-form-item>
     <nz-form-item>
       <nz-form-label nzRequired>邮箱</nz-form-label>
-      <nz-form-control [ngClass]="{'has-error': isHasError('email')}">
+      <nz-form-control [ngClass]="{'has-error': checkErrorStyle('email')}">
         <input nz-input formControlName="email" placeholder="请输入邮箱">
         <nz-form-explain *ngIf="checkError('email', 'required')">邮箱是必填项</nz-form-explain>
         <nz-form-explain *ngIf="checkError('email', 'pattern')">邮箱格式不正确</nz-form-explain>
@@ -63,14 +63,14 @@
     </nz-form-item>
     <nz-form-item>
       <nz-form-label>手机</nz-form-label>
-      <nz-form-control [ngClass]="{'has-error': isHasError('phone')}">
+      <nz-form-control [ngClass]="{'has-error': checkErrorStyle('phone')}">
         <input nz-input formControlName="phone" placeholder="请输入手机号">
         <nz-form-explain *ngIf="checkError('phone', 'pattern')">手机号格式不正确</nz-form-explain>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
       <nz-form-label>QQ</nz-form-label>
-      <nz-form-control [ngClass]="{'has-error': isHasError('qq')}">
+      <nz-form-control [ngClass]="{'has-error': checkErrorStyle('qq')}">
         <input nz-input formControlName="qq" placeholder="请输入QQ号">
         <nz-form-explain *ngIf="checkError('qq', 'pattern')">QQ号格式不正确</nz-form-explain>
       </nz-form-control>

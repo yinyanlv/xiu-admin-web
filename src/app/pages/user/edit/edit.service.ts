@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
 
-import {BaseHttp} from '../../../common/base-http';
 import {Observable} from 'rxjs';
+import {BaseEditService} from '../../../components/base-edit/base-edit.service';
 
 @Injectable()
-export class EditService extends BaseHttp {
+export class EditService extends BaseEditService {
 
   create(params: any): Observable<any> {
 

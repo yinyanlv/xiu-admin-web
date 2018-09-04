@@ -1,4 +1,4 @@
-export function getQueryParams(filters, sorts, pagination): Object {
+export function getQueryParams(filters, sorts, pagination): string {
 
   const params = {
     filters,

@@ -2,15 +2,15 @@ import {Component, OnInit, EventEmitter, Output, ChangeDetectionStrategy} from '
 import {FormBuilder, FormGroup} from '@angular/forms';
 
 import {SelectService} from '../../../services/select.service';
-import {QueryComponent} from '../../../components/query/query.component';
+import {BaseQueryComponent} from '../../../components/base-query/base-query.component';
 
 @Component({
   selector: 'user-query',
   templateUrl: './query.component.html',
-  styleUrls: ['../../../components/query/query.component.scss'],
+  styleUrls: ['../../../components/base-query/base-query.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class UserQueryComponent extends QueryComponent implements OnInit {
+export class UserQueryComponent extends BaseQueryComponent implements OnInit {
 
   roles: Array<any>;
   statuses: Array<any>;
