@@ -1,6 +1,0 @@
-<nz-card>
-  <user-query (onQuery)="doQuery($event)"></user-query>
-  <user-grid #grid [data$]="gridData$" (onCreate)="createUser()" (onUpdate)="updateUser($event)" (onModifyPassword)="modifyPassoword($event)"></user-grid>
-</nz-card>
-<user-edit [data$]="editData$" (onSaved)="saved($event)"></user-edit>
-<user-modify-password [data$]="modifyPassword$" (onSaved)="modifiedPassword($event)"></user-modify-password>

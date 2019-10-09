@@ -1,7 +1,0 @@
-<nz-tabset [nzType]="'card'" [(nzSelectedIndex)]="activeIndex" (nzSelectChange)="activateTab(activeIndex)">
-  <nz-tab *ngFor="let tab of tabs" [nzTitle]="titleTemplate">
-    <ng-template #titleTemplate>
-      <div>{{ tab.title }} <i class="anticon anticon-close" (click)="closeTab(tab)"></i></div>
-    </ng-template>
-  </nz-tab>
-</nz-tabset>
