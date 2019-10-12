@@ -1,12 +1,14 @@
 import React from 'react';
-import './App.css';
+import {DatePicker} from 'antd';
+import styles from './App.module.scss';
 
 const App: React.FC = () => {
-  return (
-    <div className="App">
-      hello xiu!
-    </div>
-  );
+    return (
+        <div className={styles.app}>
+            hello
+            <DatePicker/>
+        </div>
+    );
 };
 
 export default App;
