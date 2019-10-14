@@ -8,6 +8,7 @@
     "@types/react": "16.9.5",
     "@types/react-dom": "16.9.1",
     "antd": "^3.23.6",
+    "classnames": "^2.2.6",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
     "react-redux": "^7.1.1",
@@ -39,6 +40,7 @@
     ]
   },
   "devDependencies": {
+    "@types/react-redux": "^7.1.4",
     "babel-plugin-import": "^1.12.2",
     "customize-cra": "^0.8.0",
     "less": "^3.10.3",

@@ -1,14 +1,22 @@
 import React from 'react';
-import {DatePicker} from 'antd';
-import styles from './App.module.scss';
+import {Provider} from 'react-redux';
+import store from './store';
+import {AuthLayout} from 'src/layouts/AuthLayout';
 
-const App: React.FC = () => {
-    return (
-        <div className={styles.app}>
-            hello
-            <DatePicker/>
-        </div>
-    );
-};
+interface AppProps {
+    [key:string]: any
+}
+
+class App extends React.Component<AppProps> {
+
+    render() {
+
+        return (
+            <Provider store={store}>
+                <AuthLayout />
+            </Provider>
+        );
+    }
+}
 
 export default App;
