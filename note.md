@@ -11,6 +11,7 @@
 
 ## 需要安装types文件的包
 react-redux
+react-router-dom
 
 ## 针对ts文件定义路径别名
 步骤一：项目根目录下添加.env文件， 添加配置项NODE_PATH=./（用于node编译时定位）

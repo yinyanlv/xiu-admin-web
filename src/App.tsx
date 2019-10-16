@@ -1,5 +1,6 @@
 import React from 'react';
 import {Provider} from 'react-redux';
+import {BrowserRouter, Switch, Route} from 'react-router-dom';
 import store from './store';
 import {AuthLayout} from 'src/layouts/AuthLayout';
 
@@ -13,7 +14,14 @@ class App extends React.Component<AppProps> {
 
         return (
             <Provider store={store}>
-                <AuthLayout />
+                <BrowserRouter>
+                    <Switch>
+                        <Route path={""}>
+                            <AuthLayout />
+                        </Route>
+                    </Switch>
+                </BrowserRouter>
+
             </Provider>
         );
     }
