@@ -1,14 +1,11 @@
 import React from 'react';
 import {Switch, Route} from 'react-router-dom';
-import './AuthLayout.scss';
+import styles from  './NormalLayout.module.scss';
 import {PageLogin} from 'src/pages/Login';
 import {PageLoginHook} from 'src/pages/LoginHook';
 
-
-class AuthLayout extends React.Component {
-
+class NormalLayout extends React.Component {
     render() {
-
         return (
             <>
                 <Switch>
@@ -18,10 +15,13 @@ class AuthLayout extends React.Component {
                     <Route path={"/login-hook"}>
                         <PageLoginHook />
                     </Route>
+                    <Route path={''}>
+                        404
+                    </Route>
                 </Switch>
             </>
         );
     }
 }
 
-export default AuthLayout;
+export default NormalLayout;

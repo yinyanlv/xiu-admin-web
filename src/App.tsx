@@ -2,7 +2,8 @@ import React from 'react';
 import {Provider} from 'react-redux';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
 import store from './store';
-import {AuthLayout} from 'src/layouts/AuthLayout';
+import {NormalLayout} from 'src/layouts/NormalLayout';
+import {TabsLayout} from 'src/layouts/TabsLayout';
 
 interface AppProps {
     [key:string]: any
@@ -16,12 +17,14 @@ class App extends React.Component<AppProps> {
             <Provider store={store}>
                 <BrowserRouter>
                     <Switch>
-                        <Route path={""}>
-                            <AuthLayout />
+                        <Route path={'/tabs'}>
+                            <TabsLayout />
+                        </Route>
+                        <Route path={''}>
+                            <NormalLayout />
                         </Route>
                     </Switch>
                 </BrowserRouter>
-
             </Provider>
         );
     }

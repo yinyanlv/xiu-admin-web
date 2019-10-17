@@ -1,0 +1,11 @@
+@import "src/styles/scss/common/reset";
+@import "src/styles/scss/common/frame";
+@import "src/styles/scss/sdk/index";
+
+html {
+  font-size: 10px;
+}
+
+body {
+  background: $body-bg-color !important;
+}

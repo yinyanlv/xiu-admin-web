@@ -1,0 +1,40 @@
+@import "src/styles/scss/sdk/index";
+
+:export {
+  iconColor: $input-icon-color;
+}
+
+.loginBox {
+  position: absolute;
+  width: 320px;
+  height: 320px;
+  left: 50%;
+  top: 45%;
+  margin: -160px 0 0 -160px;
+  box-shadow: 0 0 100px rgba(0, 0, 0, 0.08);
+  padding: 36px;
+}
+
+.logoLine {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 24px;
+
+  span {
+    font-size: 2rem;
+    font-weight: 700;
+    color: $primary-color;
+  }
+}
+
+.rememberLine {
+  margin: -10px 0 5px;
+}
+
+.buttonLine {
+  button {
+    width: 100%;
+  }
+}
