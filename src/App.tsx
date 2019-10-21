@@ -5,6 +5,8 @@ import store from './store';
 import {NormalLayout} from 'src/layouts/NormalLayout';
 import {TabsLayout} from 'src/layouts/TabsLayout';
 
+const normalLayoutUrls = ['/login', 'login-hook'];
+
 interface AppProps {
     [key:string]: any
 }
@@ -17,11 +19,11 @@ class App extends React.Component<AppProps> {
             <Provider store={store}>
                 <BrowserRouter>
                     <Switch>
-                        <Route path={'/tabs'}>
-                            <TabsLayout />
-                        </Route>
-                        <Route path={''}>
+                        <Route path={normalLayoutUrls}>
                             <NormalLayout />
+                        </Route>
+                        <Route path={'/'}>
+                            <TabsLayout />
                         </Route>
                     </Switch>
                 </BrowserRouter>

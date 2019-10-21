@@ -9,7 +9,9 @@ const composeEnhancer =
     }) : compose;
 
 const reducers = combineReducers({
-
+    app: function () {
+        return {};
+    }
 });
 
 const enhancer = composeEnhancer(applyMiddleware(thunk));

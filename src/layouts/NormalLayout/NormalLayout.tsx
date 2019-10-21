@@ -9,14 +9,11 @@ class NormalLayout extends React.Component {
         return (
             <>
                 <Switch>
-                    <Route path={"/login"}>
+                    <Route path={"/login"} exact={false}>
                         <PageLogin />
                     </Route>
                     <Route path={"/login-hook"}>
                         <PageLoginHook />
-                    </Route>
-                    <Route path={''}>
-                        404
                     </Route>
                 </Switch>
             </>

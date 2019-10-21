@@ -1,5 +1,5 @@
 import React from 'react';
-import {Switch, Route} from 'react-router-dom';
+import {Switch, Route, withRouter} from 'react-router-dom';
 import styles from './TabsLayout.module.scss';
 import {Header} from 'src/components/Header';
 import {SideNav} from 'src/components/SideNav';
@@ -10,22 +10,22 @@ class TabsLayout extends React.Component {
 
     render() {
 
+        console.log(this.props);
         return (
             <>
                 <Header />
                 <SideNav />
                 <Switch>
-                    <Route path={'/tabs/dashboard'}>
+                    <Route path={'/dashboard'}>
                         <PageDashBoard />
                     </Route>
-                    <Route path={'/tabs/user'}>
+                    <Route path={'/user'}>
                         <PageUser />
                     </Route>
                 </Switch>
-
             </>
         );
     }
 }
 
-export default TabsLayout;
+export default withRouter(TabsLayout as any);
