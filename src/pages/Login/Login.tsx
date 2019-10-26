@@ -1,9 +1,10 @@
 import React from 'react';
+import {withRouter, RouteComponentProps} from 'react-router-dom';
 import {Button, Row, Form, Input, Icon, Checkbox} from 'antd';
 import {FormComponentProps} from 'antd/lib/form/Form';
 import styles from './Login.module.scss';
 
-interface PageLoginProps extends FormComponentProps{
+interface PageLoginProps extends FormComponentProps, RouteComponentProps{
 }
 
 class PageLogin extends React.PureComponent<PageLoginProps> {
@@ -15,6 +16,7 @@ class PageLogin extends React.PureComponent<PageLoginProps> {
         validateFields((err, values) => {
             if (!err) {
                 console.log(values);
+                this.props.history.push('/');
             }
         });
     };
@@ -80,4 +82,4 @@ class PageLogin extends React.PureComponent<PageLoginProps> {
     }
 }
 
-export default Form.create<PageLoginProps>()(PageLogin);
+export default withRouter(Form.create<PageLoginProps>()(PageLogin) as any);

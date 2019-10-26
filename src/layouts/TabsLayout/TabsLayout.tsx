@@ -1,8 +1,10 @@
 import React from 'react';
 import {Switch, Route, withRouter} from 'react-router-dom';
+import {Layout} from 'antd';
 import styles from './TabsLayout.module.scss';
 import {Header} from 'src/components/Header';
 import {SideNav} from 'src/components/SideNav';
+import {Footer} from 'src/components/Footer';
 import {PageDashBoard} from 'src/pages/Dashboard';
 import {PageUser} from 'src/pages/User';
 
@@ -12,18 +14,23 @@ class TabsLayout extends React.Component {
 
         console.log(this.props);
         return (
-            <>
+            <Layout>
                 <Header />
-                <SideNav />
-                <Switch>
-                    <Route path={'/dashboard'}>
-                        <PageDashBoard />
-                    </Route>
-                    <Route path={'/user'}>
-                        <PageUser />
-                    </Route>
-                </Switch>
-            </>
+                <Layout>
+                    <SideNav />
+                    <Layout.Content>
+                        <Switch>
+                            <Route path={'/dashboard'}>
+                                <PageDashBoard />
+                            </Route>
+                            <Route path={'/user'}>
+                                <PageUser />
+                            </Route>
+                        </Switch>
+                        <Footer></Footer>
+                    </Layout.Content>
+                </Layout>
+            </Layout>
         );
     }
 }

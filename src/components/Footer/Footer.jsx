@@ -1,9 +1,10 @@
 import React from 'react';
+import {Layout} from 'antd';
 
 class Footer extends React.PureComponent {
     render() {
         return (
-            <div>Footer</div>
+            <Layout.Footer>Footer</Layout.Footer>
         );
     }
 }
