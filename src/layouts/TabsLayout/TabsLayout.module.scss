@@ -1,0 +1,17 @@
+@import "src/styles/scss/sdk/index";
+
+:global {
+  html, body {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.mainContainer {
+  padding-top: $header-height;
+  width: calc(100vw - #{$aside-width});
+}
+
+.contentContainer {
+  height: calc(100vh - #{$header-height});
+}

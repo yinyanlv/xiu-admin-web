@@ -1,1 +1,30 @@
 @import "src/styles/scss/sdk/index";
+
+.header {
+  position: fixed;
+  top:0;
+  width: calc(100vw - #{$aside-width});
+  height: $header-height;
+  background: #fff;
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
+  box-shadow: 4px 4px 40px 0 rgba(0, 0, 0, 0.05);
+}
+
+.button {
+  width: $header-height;
+  height: $header-height;
+  line-height: $header-height;
+  cursor: pointer;
+  transition: all .3s ease-out;
+  text-align: center;
+  font-size: 18px;
+
+  &:hover {
+    color: $primary-color;
+    background: $btn-hover-bg-color;
+  }
+}

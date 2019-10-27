@@ -1,1 +1,27 @@
 @import "src/styles/scss/sdk/index";
+
+.sideNavContainer {
+  box-shadow: 0 0 28px 0 rgba(24, 144, 255, 0.1);
+}
+
+.logoContainer{
+  height: $header-height;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 1px 9px -3px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+  position: relative;
+
+  :global{
+    .title{
+      font-size: 18px;
+      font-weight: bold;
+      letter-spacing: 4px;
+    }
+  }
+}
+
+.menuContainer {
+  height: calc(100Vh - #{$header-height});
+}

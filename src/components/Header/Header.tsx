@@ -1,10 +1,14 @@
 import React from 'react';
-import {Layout} from 'antd';
+import {Layout, Icon} from 'antd';
+import styles from './Header.module.scss';
 
-class Header extends React.PureComponent {
+class Header extends React.PureComponent<any> {
     render() {
         return (
-            <Layout.Header>
+            <Layout.Header className={styles.header}>
+                <div className={styles.button}>
+                    <Icon type={'menu-unfold'} />
+                </div>
                 <div>Header</div>
             </Layout.Header>
         );

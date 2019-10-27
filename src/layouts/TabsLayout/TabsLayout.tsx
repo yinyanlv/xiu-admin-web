@@ -15,10 +15,10 @@ class TabsLayout extends React.Component {
         console.log(this.props);
         return (
             <Layout>
-                <Header />
-                <Layout>
-                    <SideNav />
-                    <Layout.Content>
+                <SideNav />
+                <Layout className={styles.mainContainer}>
+                    <Header />
+                    <Layout.Content className={styles.contentContainer}>
                         <Switch>
                             <Route path={'/dashboard'}>
                                 <PageDashBoard />
