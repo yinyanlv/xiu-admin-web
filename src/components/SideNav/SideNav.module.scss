@@ -24,4 +24,11 @@
 
 .menuContainer {
   height: calc(100Vh - #{$header-height});
+  padding: 24px 0;
+
+  :global {
+    .ant-menu-inline {
+      border-right: none;
+    }
+  }
 }

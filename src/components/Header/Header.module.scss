@@ -12,6 +12,20 @@
   align-items: center;
   z-index: 100;
   box-shadow: 4px 4px 40px 0 rgba(0, 0, 0, 0.05);
+
+  :global {
+    .ant-menu {
+      border-bottom: none;
+    }
+
+    .ant-menu-horizontal {
+      line-height: $header-height;
+    }
+
+    .ant-menu-submenu-title{
+      height: $header-height;
+    }
+  }
 }
 
 .button {
@@ -27,4 +41,26 @@
     color: $primary-color;
     background: $btn-hover-bg-color;
   }
+}
+
+.notice{
+  width:48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #b2b0c7;
+  font-size: 24px;
+  margin-right: 10px;
+  cursor: pointer;
+
+  &:hover {
+    background: $btn-hover-bg-color;
+  }
+}
+
+.operationContainer{
+  display: flex;
+  align-items: center;
 }
