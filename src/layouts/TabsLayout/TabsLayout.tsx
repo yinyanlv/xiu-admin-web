@@ -1,18 +1,29 @@
 import React from 'react';
-import {Switch, Route, withRouter} from 'react-router-dom';
+import {Switch, Route, withRouter, Link} from 'react-router-dom';
 import {Layout, Tabs} from 'antd';
 import styles from './TabsLayout.module.scss';
 import {Header} from 'src/components/Header';
 import {SideNav} from 'src/components/SideNav';
 import {Footer} from 'src/components/Footer';
-import {PageDashBoard} from 'src/pages/Dashboard';
-import {PageUser} from 'src/pages/User';
+import {RouteTabs} from 'src/components/RouteTabs';
+import {PageDashboard} from "src/pages/Dashboard";
+import {PageUser} from "src/pages/User";
+
+const items = [{
+    path: '/dashboard',
+    key: 'dashboard',
+    title: '首页',
+    component: PageDashboard
+}, {
+    path: '/user',
+    key: 'user',
+    title: '用户',
+    component: PageUser
+}];
 
 class TabsLayout extends React.Component {
 
     render() {
-
-        console.log(this.props);
         return (
             <Layout>
                 <SideNav />
@@ -20,21 +31,7 @@ class TabsLayout extends React.Component {
                     <Header />
                     <Layout.Content className={styles.contentContainer}>
                         <div className={styles.innerContentContainer}>
-                            <Tabs type={'card'} style={{
-                                marginTop: '12px'
-                            }}>
-                                <Tabs.TabPane closable={true} tab={'页面一'} key={'1'}>1</Tabs.TabPane>
-                                <Tabs.TabPane closable={true} tab={'页面二'}  key={'2'}>2</Tabs.TabPane>
-                                <Tabs.TabPane closable={true} tab={'页面三'} key={'3'}>3</Tabs.TabPane>
-                            </Tabs>
-                            <Switch>
-                                <Route path={'/dashboard'}>
-                                    <PageDashBoard />
-                                </Route>
-                                <Route path={'/user'}>
-                                    <PageUser />
-                                </Route>
-                            </Switch>
+                            <RouteTabs items={items}  />
                         </div>
                         <Footer></Footer>
                     </Layout.Content>

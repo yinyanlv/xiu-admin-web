@@ -1,1 +1,1 @@
-export {default as PageDashBoard} from './Dashboard';
+export {default as PageDashboard} from './Dashboard';

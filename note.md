@@ -33,3 +33,8 @@ react-router-dom
     }
 }
 ```
+
+## 允许隐式any，tsconfig.json新增配置项
+```
+"noImplicitAny": false
+```

@@ -17,12 +17,36 @@ export class PageUser extends React.PureComponent {
         return (
             <>
                 <div>
-                    <form>
-                        <Form.Item label={'用户名'} labelAlign={'right'}>
+                    <Form layout={'horizontal'} >
+                        <Form.Item label={'用户名'}>
                             <Input prefix={<Icon type="lock" />}
                             />
                         </Form.Item>
-                    </form>
+                        <Form.Item label={'邮箱'}>
+                            <Input prefix={<Icon type="lock" />}
+                            />
+                        </Form.Item>
+                    </Form>
+                    <Form layout={'vertical'} >
+                        <Form.Item label={'用户名'}>
+                            <Input prefix={<Icon type="lock" />}
+                            />
+                        </Form.Item>
+                        <Form.Item label={'邮箱'}>
+                            <Input prefix={<Icon type="lock" />}
+                            />
+                        </Form.Item>
+                    </Form>
+                    <Form layout={'inline'} >
+                        <Form.Item label={'用户名'}>
+                            <Input prefix={<Icon type="lock" />}
+                            />
+                        </Form.Item>
+                        <Form.Item label={'邮箱'}>
+                            <Input prefix={<Icon type="lock" />}
+                            />
+                        </Form.Item>
+                    </Form>
                 </div>
                 <div>
 
@@ -36,5 +60,6 @@ export class PageUser extends React.PureComponent {
         );
     }
 }
+
 
 export default PageUser;
