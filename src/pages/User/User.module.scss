@@ -1,1 +1,28 @@
 @import "src/styles/scss/sdk/index";
+
+.queryPanel{
+  padding: 24px 12px;
+  background: #fff;
+  border-radius: 2px;
+  border: 1px solid $lighter-bd-color;
+  box-shadow: 4px 4px 20px 0 rgba(0, 0, 0, 0.01);
+}
+
+.buttonLine{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  button {
+    margin-right: 12px;
+  }
+}
+
+.tablePanel{
+  margin-top: 24px;
+  padding: 24px 24px;
+  background: #fff;
+  border-radius: 2px;
+  border: 1px solid $lighter-bd-color;
+  box-shadow: 4px 4px 20px 0 rgba(0, 0, 0, 0.01);
+}

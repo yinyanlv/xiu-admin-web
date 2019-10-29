@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link, NavLink} from 'react-router-dom';
 import {Layout, Menu, Icon} from 'antd';
 import {ScrollBar} from 'src/components/ScrollBar';
 import styles from './SideNav.module.scss';
@@ -8,7 +9,6 @@ const SubMenu = Menu.SubMenu;
 class SideNav extends React.PureComponent {
 
     handleClick = () => {
-
     };
 
     render() {
@@ -23,44 +23,31 @@ class SideNav extends React.PureComponent {
                     }}>
                         <Menu
                             onClick={this.handleClick}
-                            defaultSelectedKeys={['1']}
-                            defaultOpenKeys={['sub1']}
                             mode="inline"
-
+                            openKeys={['statistics']}
                         >
+                            <Menu.Item key="dashboard">
+                              <Link to={'/dashboard'}>
+                                  <Icon type="dashboard"/>
+                                  <span>Dashboard</span>
+                              </Link>
+                            </Menu.Item>
+                            <Menu.Item key="user">
+                              <Link to={'/user'}>
+                                  <Icon type="user"/>
+                                  <span>用户</span>
+                              </Link>
+                            </Menu.Item>
                             <SubMenu
-                                key="sub1"
+                                key="statistics"
                                 title={
                                     <span>
-                                  <Icon type="mail"/>
-                                  <span>Navigation One</span>
-                                </span>
-                                }
-                            >
-                                <Menu.ItemGroup key="g1" title="Item 1">
-                                    <Menu.Item key="1">Option 1</Menu.Item>
-                                    <Menu.Item key="2">Option 2</Menu.Item>
-                                </Menu.ItemGroup>
-                                <Menu.ItemGroup key="g2" title="Item 2">
-                                    <Menu.Item key="3">Option 3</Menu.Item>
-                                    <Menu.Item key="4">Option 4</Menu.Item>
-                                </Menu.ItemGroup>
-                            </SubMenu>
-                            <SubMenu
-                                key="sub2"
-                                title={
-                                    <span>
-                                      <Icon type="appstore"/>
-                                      <span>Navigation Two</span>
+                                      <Icon type="code-o"/>
+                                      <span>统计</span>
                                     </span>
                                 }
                             >
-                                <Menu.Item key="5">Option 5</Menu.Item>
-                                <Menu.Item key="6">Option 6</Menu.Item>
-                                <SubMenu key="sub3" title="Submenu">
-                                    <Menu.Item key="7">Option 7</Menu.Item>
-                                    <Menu.Item key="8">Option 8</Menu.Item>
-                                </SubMenu>
+                                <Menu.Item key="visit">访问统计</Menu.Item>
                             </SubMenu>
                         </Menu>
                     </ScrollBar>

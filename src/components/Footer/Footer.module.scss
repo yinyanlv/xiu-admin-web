@@ -1,12 +1,14 @@
 @import "src/styles/scss/sdk/index";
 
 .footer {
+  margin-top: 24px;
   height: $header-height;
   background: #fff;
   color: $lightest-font-color;
-  font-size:12px;
+  font-size: 14px;
   text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: 4px 4px 20px 0 rgba(0, 0, 0, 0.01);
 }

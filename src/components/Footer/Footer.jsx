@@ -5,7 +5,7 @@ import styles from './Footer.module.scss';
 class Footer extends React.PureComponent {
     render() {
         return (
-            <Layout.Footer className={styles.footer}>xiu ©2019</Layout.Footer>
+            <Layout.Footer className={styles.footer}>xiu © 2019</Layout.Footer>
         );
     }
 }

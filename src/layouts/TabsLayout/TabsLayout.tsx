@@ -6,13 +6,13 @@ import {Header} from 'src/components/Header';
 import {SideNav} from 'src/components/SideNav';
 import {Footer} from 'src/components/Footer';
 import {RouteTabs} from 'src/components/RouteTabs';
-import {PageDashboard} from "src/pages/Dashboard";
-import {PageUser} from "src/pages/User";
+import {PageDashboard} from 'src/pages/Dashboard';
+import {PageUser} from 'src/pages/User';
 
 const items = [{
     path: '/dashboard',
     key: 'dashboard',
-    title: '首页',
+    title: 'Dashboard',
     component: PageDashboard
 }, {
     path: '/user',
