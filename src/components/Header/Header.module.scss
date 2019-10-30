@@ -28,6 +28,10 @@
   }
 }
 
+.sideNavCollapsed {
+  width: calc(100vw - #{$collapsed-aside-width});
+}
+
 .button {
   width: $header-height;
   height: $header-height;

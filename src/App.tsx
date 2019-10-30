@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {Context} from 'react';
 import {Provider} from 'react-redux';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
 import store from './store';
+import {AppContext} from './AppContext';
 import {NormalLayout} from 'src/layouts/NormalLayout';
 import {TabsLayout} from 'src/layouts/TabsLayout';
 
@@ -13,20 +14,32 @@ interface AppProps {
 
 class App extends React.Component<AppProps> {
 
+    state = {
+        isSideNavCollapsed: true
+    };
+
+    toggleSideNav = () => {
+        this.setState({
+            isSideNavCollapsed: !this.state.isSideNavCollapsed
+        });
+    };
+
     render() {
 
         return (
             <Provider store={store}>
-                <BrowserRouter>
-                    <Switch>
-                        <Route path={normalLayoutUrls}>
-                            <NormalLayout />
-                        </Route>
-                        <Route path={'/'}>
-                            <TabsLayout />
-                        </Route>
-                    </Switch>
-                </BrowserRouter>
+                <AppContext.Provider value={this.state}>
+                    <BrowserRouter>
+                        <Switch>
+                            <Route path={normalLayoutUrls}>
+                                <NormalLayout />
+                            </Route>
+                            <Route path={'/'}>
+                                <TabsLayout toggleSideNav={this.toggleSideNav} />
+                            </Route>
+                        </Switch>
+                    </BrowserRouter>
+                </AppContext.Provider>
             </Provider>
         );
     }

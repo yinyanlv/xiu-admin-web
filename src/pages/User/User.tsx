@@ -19,12 +19,22 @@ export class PageUser extends React.PureComponent {
                 <div className={styles.queryPanel}>
                     <Form>
                         <Row gutter={24}>
-                            <Col span={6}>
+                            <Col xs={{span: 24}} sm={{span: 24}} md={{span: 8}} lg={{span: 6}}>
                                 <Form.Item label={'用户名'} labelCol={{span: 6}} wrapperCol={{span: 18}}>
                                     <Input />
                                 </Form.Item>
                             </Col>
-                            <Col span={6}>
+                            <Col xs={{span: 24}} sm={{span: 24}} md={{span: 8}} lg={{span: 6}}>
+                                <Form.Item label={'邮箱'} labelCol={{span: 6}} wrapperCol={{span: 18}}>
+                                    <Input />
+                                </Form.Item>
+                            </Col>
+                            <Col xs={{span: 24}} sm={{span: 24}} md={{span: 8}} lg={{span: 6}}>
+                                <Form.Item label={'邮箱'} labelCol={{span: 6}} wrapperCol={{span: 18}}>
+                                    <Input />
+                                </Form.Item>
+                            </Col>
+                            <Col xs={{span: 24}} sm={{span: 24}} md={{span: 8}} lg={{span: 6}}>
                                 <Form.Item label={'邮箱'} labelCol={{span: 6}} wrapperCol={{span: 18}}>
                                     <Input />
                                 </Form.Item>
@@ -55,4 +65,4 @@ export class PageUser extends React.PureComponent {
 }
 
 
-export default PageUser;
+export default  Form.create()(PageUser);

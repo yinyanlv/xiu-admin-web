@@ -1,15 +1,24 @@
 import React from 'react';
 import {Layout, Icon, Menu, Avatar, Popover, Badge} from 'antd';
+import classnames from 'classnames';
 import styles from './Header.module.scss';
 
-const SubMenu = Menu.SubMenu;
+interface HeaderProps {
+    toggleSideNav: () => void;
+    isSideNavCollapsed: boolean;
+}
 
-class Header extends React.PureComponent<any> {
+class Header extends React.PureComponent<HeaderProps> {
+
     render() {
+        const {toggleSideNav, isSideNavCollapsed} = this.props;
+
         return (
-            <Layout.Header className={styles.header}>
-                <div className={styles.button}>
-                    <Icon type={'menu-unfold'} />
+            <Layout.Header className={classnames(styles.header, {
+                [styles.sideNavCollapsed]: isSideNavCollapsed
+            })}>
+                <div className={styles.button} onClick={toggleSideNav}>
+                    <Icon type={isSideNavCollapsed ? 'menu-unfold' : 'menu-fold'} />
                 </div>
                 <div className={styles.operationContainer}>
                     <Popover>
@@ -22,7 +31,7 @@ class Header extends React.PureComponent<any> {
                     </Popover>
 
                     <Menu key={'user'} mode={'horizontal'}>
-                        <SubMenu title={
+                        <Menu.SubMenu title={
                             <>
                                 <span style={{
                                     marginRight: '5px'
@@ -33,7 +42,7 @@ class Header extends React.PureComponent<any> {
                             <Menu.Item>
                                 退出登录
                             </Menu.Item>
-                        </SubMenu>
+                        </Menu.SubMenu>
                     </Menu>
                 </div>
             </Layout.Header>

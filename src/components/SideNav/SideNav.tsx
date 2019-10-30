@@ -1,44 +1,51 @@
 import React from 'react';
 import {Link, NavLink} from 'react-router-dom';
 import {Layout, Menu, Icon} from 'antd';
+import {AppContext} from 'src/AppContext';
 import {ScrollBar} from 'src/components/ScrollBar';
 import styles from './SideNav.module.scss';
 
-const SubMenu = Menu.SubMenu;
 
 class SideNav extends React.PureComponent {
 
-    handleClick = () => {
-    };
+    static contextType = AppContext;
+
+    constructor(props) {
+        super(props);
+    }
 
     render() {
+        const context = this.context;
+
         return (
-            <Layout.Sider theme={'light'} width={256} className={styles.sideNavContainer}>
+            <Layout.Sider
+                theme={'light'}
+                width={256}
+                className={styles.sideNavContainer}
+                collapsed={context.isSideNavCollapsed}
+            >
                 <div className={styles.logoContainer}>
-                    <span className="title">XIU后台管理系统</span>
+                    <span className="title">{context.isSideNavCollapsed ? 'XIU' : 'XIU后台管理系统'}</span>
                 </div>
-                <div className={styles.menuContainer}>
+                <div className={styles.menuContainer} >
                     <ScrollBar options={{
                         suppressScrollX: true
-                    }}>
+                    }} style={{width: 256}}>
                         <Menu
-                            onClick={this.handleClick}
                             mode="inline"
-                            openKeys={['statistics']}
+                            defaultSelectedKeys={['dashboard']}
+                            defaultOpenKeys={['statistics']}
+
                         >
                             <Menu.Item key="dashboard">
-                              <Link to={'/dashboard'}>
-                                  <Icon type="dashboard"/>
-                                  <span>Dashboard</span>
-                              </Link>
+                                <Icon type="dashboard"/>
+                                <span>Dashboard</span>
                             </Menu.Item>
                             <Menu.Item key="user">
-                              <Link to={'/user'}>
-                                  <Icon type="user"/>
-                                  <span>用户</span>
-                              </Link>
+                                <Icon type="user"/>
+                                <span>用户</span>
                             </Menu.Item>
-                            <SubMenu
+                            <Menu.SubMenu
                                 key="statistics"
                                 title={
                                     <span>
@@ -48,7 +55,7 @@ class SideNav extends React.PureComponent {
                                 }
                             >
                                 <Menu.Item key="visit">访问统计</Menu.Item>
-                            </SubMenu>
+                            </Menu.SubMenu>
                         </Menu>
                     </ScrollBar>
                 </div>

@@ -2,6 +2,7 @@ import React from 'react';
 import {Switch, Route, withRouter, Link} from 'react-router-dom';
 import {Layout, Tabs} from 'antd';
 import styles from './TabsLayout.module.scss';
+import {AppContext} from 'src/AppContext';
 import {Header} from 'src/components/Header';
 import {SideNav} from 'src/components/SideNav';
 import {Footer} from 'src/components/Footer';
@@ -21,14 +22,23 @@ const items = [{
     component: PageUser
 }];
 
-class TabsLayout extends React.Component {
+interface TabsLayoutProps {
+    toggleSideNav: () => void;
+}
+
+class TabsLayout extends React.PureComponent<TabsLayoutProps> {
+
+    static contextType = AppContext;
 
     render() {
+        const {toggleSideNav} = this.props;
+        const {isSideNavCollapsed} = this.context;
+
         return (
             <Layout>
                 <SideNav />
                 <Layout className={styles.mainContainer}>
-                    <Header />
+                    <Header toggleSideNav={toggleSideNav} isSideNavCollapsed={isSideNavCollapsed} />
                     <Layout.Content className={styles.contentContainer}>
                         <div className={styles.innerContentContainer}>
                             <RouteTabs items={items}  />
@@ -41,4 +51,4 @@ class TabsLayout extends React.Component {
     }
 }
 
-export default withRouter(TabsLayout as any);
+export default TabsLayout;
