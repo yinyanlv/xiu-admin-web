@@ -5,10 +5,15 @@ import styles from './Header.module.scss';
 
 interface HeaderProps {
     toggleSideNav: () => void;
+    controlNotice: (isShow: boolean) => void;
     isSideNavCollapsed: boolean;
 }
 
 class Header extends React.PureComponent<HeaderProps> {
+
+    showNotice = () => {
+        this.props.controlNotice(true);
+    };
 
     render() {
         const {toggleSideNav, isSideNavCollapsed} = this.props;
@@ -21,15 +26,14 @@ class Header extends React.PureComponent<HeaderProps> {
                     <Icon type={isSideNavCollapsed ? 'menu-unfold' : 'menu-fold'} />
                 </div>
                 <div className={styles.operationContainer}>
-                    <Popover>
+                    <div onClick={this.showNotice}>
                         <Badge className={styles.notice}
                                dot
                                offset={[-10, 10]}
                         >
                             <Icon type={'bell'} />
                         </Badge>
-                    </Popover>
-
+                    </div>
                     <Menu key={'user'} mode={'horizontal'}>
                         <Menu.SubMenu title={
                             <>

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link, NavLink} from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 import {Layout, Menu, Icon} from 'antd';
 import {AppContext} from 'src/AppContext';
 import {ScrollBar} from 'src/components/ScrollBar';
@@ -38,12 +38,16 @@ class SideNav extends React.PureComponent {
 
                         >
                             <Menu.Item key="dashboard">
-                                <Icon type="dashboard"/>
-                                <span>Dashboard</span>
+                                <NavLink to={'/dashboard'}>
+                                    <Icon type="dashboard"/>
+                                    <span>Dashboard</span>
+                                </NavLink>
                             </Menu.Item>
                             <Menu.Item key="user">
-                                <Icon type="user"/>
-                                <span>用户</span>
+                                <NavLink to={'/user'}>
+                                    <Icon type="user"/>
+                                    <span>用户</span>
+                                </NavLink>
                             </Menu.Item>
                             <Menu.SubMenu
                                 key="statistics"
@@ -54,7 +58,11 @@ class SideNav extends React.PureComponent {
                                     </span>
                                 }
                             >
-                                <Menu.Item key="visit">访问统计</Menu.Item>
+                                <Menu.Item key="visit">
+                                    <NavLink to={'/count'}>
+                                        访问统计
+                                    </NavLink>
+                                </Menu.Item>
                             </Menu.SubMenu>
                         </Menu>
                     </ScrollBar>

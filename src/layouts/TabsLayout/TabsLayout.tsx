@@ -1,6 +1,6 @@
 import React from 'react';
-import {Switch, Route, withRouter, Link} from 'react-router-dom';
-import {Layout, Tabs} from 'antd';
+import {Layout} from 'antd';
+import classnames from 'classnames';
 import styles from './TabsLayout.module.scss';
 import {AppContext} from 'src/AppContext';
 import {Header} from 'src/components/Header';
@@ -9,6 +9,7 @@ import {Footer} from 'src/components/Footer';
 import {RouteTabs} from 'src/components/RouteTabs';
 import {PageDashboard} from 'src/pages/Dashboard';
 import {PageUser} from 'src/pages/User';
+import {Notice} from 'src/components/Notice';
 
 const items = [{
     path: '/dashboard',
@@ -23,7 +24,7 @@ const items = [{
 }];
 
 interface TabsLayoutProps {
-    toggleSideNav: () => void;
+
 }
 
 class TabsLayout extends React.PureComponent<TabsLayoutProps> {
@@ -31,14 +32,19 @@ class TabsLayout extends React.PureComponent<TabsLayoutProps> {
     static contextType = AppContext;
 
     render() {
-        const {toggleSideNav} = this.props;
-        const {isSideNavCollapsed} = this.context;
+        const {isSideNavCollapsed, isShowNotice, toggleSideNav, controlNotice} = this.context;
 
         return (
             <Layout>
                 <SideNav />
-                <Layout className={styles.mainContainer}>
-                    <Header toggleSideNav={toggleSideNav} isSideNavCollapsed={isSideNavCollapsed} />
+                <Layout className={classnames(styles.mainContainer, {
+                    [styles.sideNavCollapsed]: isSideNavCollapsed
+                })}>
+                    <Header
+                        toggleSideNav={toggleSideNav}
+                        isSideNavCollapsed={isSideNavCollapsed}
+                        controlNotice={controlNotice}
+                    />
                     <Layout.Content className={styles.contentContainer}>
                         <div className={styles.innerContentContainer}>
                             <RouteTabs items={items}  />
@@ -46,6 +52,7 @@ class TabsLayout extends React.PureComponent<TabsLayoutProps> {
                         <Footer></Footer>
                     </Layout.Content>
                 </Layout>
+                <Notice isShow={isShowNotice} controlNotice={controlNotice}  />
             </Layout>
         );
     }

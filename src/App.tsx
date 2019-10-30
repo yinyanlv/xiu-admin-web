@@ -9,33 +9,37 @@ import {TabsLayout} from 'src/layouts/TabsLayout';
 const normalLayoutUrls = ['/login', 'login-hook'];
 
 interface AppProps {
-    [key:string]: any
+    [key: string]: any
 }
 
 class App extends React.Component<AppProps> {
 
     state = {
-        isSideNavCollapsed: true
-    };
-
-    toggleSideNav = () => {
-        this.setState({
-            isSideNavCollapsed: !this.state.isSideNavCollapsed
-        });
+        isSideNavCollapsed: false,
+        isShowNotice: false,
+        toggleSideNav: () => {
+            this.setState({
+                isSideNavCollapsed: !this.state.isSideNavCollapsed
+            });
+        },
+        controlNotice: (isShow: boolean) => {
+            this.setState({
+                isShowNotice: isShow
+            });
+        }
     };
 
     render() {
-
         return (
             <Provider store={store}>
                 <AppContext.Provider value={this.state}>
                     <BrowserRouter>
                         <Switch>
                             <Route path={normalLayoutUrls}>
-                                <NormalLayout />
+                                <NormalLayout/>
                             </Route>
                             <Route path={'/'}>
-                                <TabsLayout toggleSideNav={this.toggleSideNav} />
+                                <TabsLayout/>
                             </Route>
                         </Switch>
                     </BrowserRouter>

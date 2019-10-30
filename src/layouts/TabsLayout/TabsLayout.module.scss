@@ -12,6 +12,10 @@
   width: calc(100vw - #{$aside-width});
 }
 
+.sideNavCollapsed {
+  width: calc(100vw - #{$collapsed-aside-width});
+}
+
 .contentContainer {
   height: calc(100vh - #{$header-height});
 }
