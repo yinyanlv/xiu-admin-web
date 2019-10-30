@@ -1,1 +1,13 @@
 @import "src/styles/scss/sdk/index";
+
+.tabsContainer {
+
+  :global {
+    .ant-tabs-bar{
+      position: fixed;
+      top: $header-height + 12px;
+      background: #fff;
+      width: calc(100vw - #{$aside-width + 48px});
+    }
+  }
+}

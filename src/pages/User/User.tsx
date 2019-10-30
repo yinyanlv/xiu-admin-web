@@ -15,7 +15,7 @@ export class PageUser extends React.PureComponent {
         }];
 
         return (
-            <>
+            <div>
                 <div className={styles.queryPanel}>
                     <Form>
                         <Row gutter={24}>
@@ -59,7 +59,7 @@ export class PageUser extends React.PureComponent {
                     >
                     </Table>
                 </div>
-            </>
+            </div>
         );
     }
 }

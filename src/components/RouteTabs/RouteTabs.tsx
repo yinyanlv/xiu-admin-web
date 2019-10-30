@@ -1,9 +1,10 @@
 import React from 'react';
+import {Provider as KeepAliveProvider, KeepAlive} from 'react-keep-alive';
 import {Tabs} from 'antd';
-import {Link, Route} from "react-router-dom";
+import {Route, RouteComponentProps, withRouter} from "react-router-dom";
 import styles from './RouteTabs.module.scss';
 
-interface RouteTabsProps {
+interface RouteTabsProps extends RouteComponentProps{
     items: any[]
 }
 
@@ -14,30 +15,44 @@ class RouteTabs extends React.Component<RouteTabsProps> {
         console.log(action);
     };
 
+    onTabClick = (targetKey, e) => {
+        const item = this.props.items.filter((item) => {
+            if (item.key === targetKey) {
+                return true;
+            } else {
+                return false;
+            }
+        });
+        this.props.history.push(item[0].path);
+    };
+
     render() {
         const items = this.props.items;
 
         return (
-            <Tabs type={'editable-card'}
-                  style={{
-                      marginTop: '12px'
-                  }}
-                  onEdit={this.onEdit}
-            >
-                {
-                    items.map((item) =>{
-                        return (
-                            <Tabs.TabPane closable tab={<Link to={item.path}>{item.title}</Link>} key={item.key}>
-                                <Route path={item.path} exact>
-                                    <item.component />
-                                </Route>
-                            </Tabs.TabPane>
-                        );
-                    })
-                }
-            </Tabs>
+            <KeepAliveProvider>
+                <Tabs type={'editable-card'}
+                      className={styles.tabsContainer}
+                      onEdit={this.onEdit}
+                      onTabClick={this.onTabClick}
+                >
+                    {
+                        items.map((item) =>{
+                            return (
+                                <Tabs.TabPane closable tab={item.title} key={item.key}>
+                                    <Route path={item.path} exact>
+                                        <KeepAlive name={item.key}>
+                                            <item.component />
+                                        </KeepAlive>
+                                    </Route>
+                                </Tabs.TabPane>
+                            );
+                        })
+                    }
+                </Tabs>
+            </KeepAliveProvider>
         );
     }
 }
 
-export default RouteTabs;
+export default withRouter(RouteTabs);
