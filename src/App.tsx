@@ -1,7 +1,9 @@
-import React, {Context} from 'react';
+import React from 'react';
 import {Provider} from 'react-redux';
-import {BrowserRouter, Switch, Route} from 'react-router-dom';
+import {Router, Switch, Route} from 'react-router-dom';
+import 'mock';
 import store from './store';
+import history from './history';
 import {AppContext} from './AppContext';
 import {NormalLayout} from 'src/layouts/NormalLayout';
 import {TabsLayout} from 'src/layouts/TabsLayout';
@@ -33,7 +35,7 @@ class App extends React.Component<AppProps> {
         return (
             <Provider store={store}>
                 <AppContext.Provider value={this.state}>
-                    <BrowserRouter>
+                    <Router history={history}>
                         <Switch>
                             <Route path={normalLayoutUrls}>
                                 <NormalLayout/>
@@ -42,7 +44,7 @@ class App extends React.Component<AppProps> {
                                 <TabsLayout/>
                             </Route>
                         </Switch>
-                    </BrowserRouter>
+                    </Router>
                 </AppContext.Provider>
             </Provider>
         );

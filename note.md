@@ -38,3 +38,9 @@ react-router-dom
 ```
 "noImplicitAny": false
 ```
+
+## history.js，安装react-router-dom时会同时安装history，不需要另外安装history
+```
+https://juejin.im/entry/598868126fb9a03c38109805
+https://github.com/brickspert/blog/issues/3
+```

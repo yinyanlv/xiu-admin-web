@@ -1,5 +1,6 @@
 import {combineReducers, createStore, compose, applyMiddleware} from 'redux';
 import thunk from 'redux-thunk';
+import login from 'src/pages/Login/reducer';
 
 const composeEnhancer =
     process.env.NODE_ENV !== 'production' &&
@@ -9,9 +10,7 @@ const composeEnhancer =
     }) : compose;
 
 const reducers = combineReducers({
-    app: function () {
-        return {};
-    }
+    login
 });
 
 const enhancer = composeEnhancer(applyMiddleware(thunk));

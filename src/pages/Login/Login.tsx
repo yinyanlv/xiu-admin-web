@@ -1,10 +1,15 @@
 import React from 'react';
-import {withRouter, RouteComponentProps} from 'react-router-dom';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+import {RouteComponentProps} from 'react-router-dom';
 import {Button, Row, Form, Input, Icon, Checkbox} from 'antd';
 import {FormComponentProps} from 'antd/lib/form/Form';
 import styles from './Login.module.scss';
+import * as actions from './actions';
 
-interface PageLoginProps extends FormComponentProps, RouteComponentProps{
+interface PageLoginProps extends FormComponentProps {
+    login: any;
+    doLogin: Function;
 }
 
 class PageLogin extends React.PureComponent<PageLoginProps> {
@@ -15,8 +20,7 @@ class PageLogin extends React.PureComponent<PageLoginProps> {
 
         validateFields((err, values) => {
             if (!err) {
-                console.log(values);
-                this.props.history.push('/');
+                this.props.doLogin(values);
             }
         });
     };
@@ -82,4 +86,16 @@ class PageLogin extends React.PureComponent<PageLoginProps> {
     }
 }
 
-export default withRouter(Form.create<PageLoginProps>()(PageLogin));
+function mapStateToProps({login}) {
+    return {
+        login
+    };
+}
+
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({
+        doLogin: actions.doLogin
+    }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Form.create<PageLoginProps>()(PageLogin));
