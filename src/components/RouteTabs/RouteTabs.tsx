@@ -27,7 +27,8 @@ class RouteTabs extends React.Component<RouteTabsProps> {
     };
 
     render() {
-        const items = this.props.items;
+        const {items, location} = this.props;
+        const activeTabKey = location.pathname.slice(1).replace(/\//g, ':');
 
         return (
             <KeepAliveProvider>
@@ -35,6 +36,7 @@ class RouteTabs extends React.Component<RouteTabsProps> {
                       className={styles.tabsContainer}
                       onEdit={this.onEdit}
                       onTabClick={this.onTabClick}
+                      activeKey={activeTabKey}
                 >
                     {
                         items.map((item) =>{

@@ -5,9 +5,11 @@
   :global {
     .ant-tabs-bar{
       position: fixed;
-      top: $header-height + 12px;
-      background: #fff;
+      padding-top: 12px;
+      top: $header-height;
+      background: $body-bg-color;
       width: calc(100vw - #{$aside-width + 48px});
+      z-index: 10;
     }
   }
 }

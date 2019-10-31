@@ -1,12 +1,14 @@
 import React from 'react';
-import {NavLink} from 'react-router-dom';
+import {NavLink, RouteComponentProps, withRouter} from 'react-router-dom';
 import {Layout, Menu, Icon} from 'antd';
 import {AppContext} from 'src/AppContext';
 import {ScrollBar} from 'src/components/ScrollBar';
 import styles from './SideNav.module.scss';
 
+interface SideNavProps extends  RouteComponentProps {
+}
 
-class SideNav extends React.PureComponent {
+class SideNav extends React.PureComponent<SideNavProps> {
 
     static contextType = AppContext;
 
@@ -15,7 +17,9 @@ class SideNav extends React.PureComponent {
     }
 
     render() {
+        const {location} = this.props;
         const context = this.context;
+        const activeTabKey = location.pathname.slice(1).replace(/\//g, ':');
 
         return (
             <Layout.Sider
@@ -35,7 +39,7 @@ class SideNav extends React.PureComponent {
                             mode="inline"
                             defaultSelectedKeys={['dashboard']}
                             defaultOpenKeys={['statistics']}
-
+                            selectedKeys={[activeTabKey]}
                         >
                             <Menu.Item key="dashboard">
                                 <NavLink to={'/dashboard'}>
@@ -72,4 +76,4 @@ class SideNav extends React.PureComponent {
     }
 }
 
-export default SideNav;
+export default withRouter(SideNav);

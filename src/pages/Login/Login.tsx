@@ -82,4 +82,4 @@ class PageLogin extends React.PureComponent<PageLoginProps> {
     }
 }
 
-export default withRouter(Form.create<PageLoginProps>()(PageLogin) as any);
+export default withRouter(Form.create<PageLoginProps>()(PageLogin));
