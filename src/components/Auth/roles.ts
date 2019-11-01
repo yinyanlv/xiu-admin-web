@@ -1,4 +1,4 @@
-export const Roles = {
+export const ROLES = {
     admin: [],
     staff: [],
     guest: []

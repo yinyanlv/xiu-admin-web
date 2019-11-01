@@ -1,4 +1,4 @@
-import {Roles} from 'src/components/Auth/roles';
+import {ROLES} from 'src/components/Auth';
 import {PageDashboard} from 'src/pages/Dashboard';
 import {PageUser} from 'src/pages/User';
 
@@ -8,13 +8,13 @@ export const routes = [{
     title: 'Dashboard',
     component: PageDashboard,
     exact: true,
-    auth: Roles.staff
+    auth: ROLES.staff
 }, {
     path: '/user',
     key: 'user',
     title: '用户',
     component: PageUser,
     exact: true,
-    auth: Roles.staff
+    auth: ROLES.staff
 }];
 

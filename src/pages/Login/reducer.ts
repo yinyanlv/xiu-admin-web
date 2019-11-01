@@ -1,14 +1,22 @@
 import * as actions from './actions';
 
 const initialState = {
-    isAuthorized: false
+    isHandling: false,
+    errorMessage: ''
 };
 
 function login(state = initialState, action) {
     switch (action.type) {
-        case actions.AUTHORIZED:
+        case actions.DO_LOGIN:
             return {
-                isAuthorized: true
+                isHandling: true,
+                errorMessage: ''
+            };
+        case actions.LOGIN_FAILED:
+
+            return {
+                isHandling: false,
+                errorMessage: action.payload
             };
         default:
             return state;

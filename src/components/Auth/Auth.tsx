@@ -28,22 +28,26 @@ class Auth extends React.PureComponent<AuthProps> {
             };
         }
     }
-    //
-    // componentDidMount(): void {
-    //     if (!this.state.accessGranted) {
-    //         this._redirect();
-    //     }
-    // }
-    //
-    // componentDidUpdate(prevProps: Readonly<AuthProps>, prevState: Readonly<{}>, snapshot?: any): void {
-    //     if (!this.state.accessGranted) {
-    //         this._redirect();
-    //     }
-    // }
+
+    componentDidMount(): void {
+        if (!this.state.accessGranted) {
+            this._redirect();
+        }
+    }
+
+    componentDidUpdate(prevProps: Readonly<AuthProps>, prevState: Readonly<{}>, snapshot?: any): void {
+        if (!this.state.accessGranted) {
+            this._redirect();
+        }
+    }
 
     private _redirect() {
         const {history, location} = this.props;
         const {pathname, search, hash} = location;
+
+        if (pathname === '/login') {
+            return;
+        }
 
         history.push({
             pathname: '/login',

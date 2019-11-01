@@ -33,9 +33,9 @@ class PageLogin extends React.PureComponent<PageLoginProps> {
                 <div className={styles.logoLine}>
                     <span>xiu管理系统</span>
                 </div>
-                <Row>
-                    <Alert message="Error" type="error" showIcon />
-                </Row>
+                {
+                    this.props.login.errorMessage && <Alert className={styles.errorLine} message={this.props.login.errorMessage} type="error" showIcon />
+                }
                 <div>
                     <form onSubmit={this.handleSubmit}>
                         <Form.Item hasFeedback>

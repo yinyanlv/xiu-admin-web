@@ -7,7 +7,7 @@
 .loginBox {
   position: absolute;
   width: 320px;
-  height: 320px;
+  min-height: 320px;
   left: 50%;
   top: 45%;
   margin: -160px 0 0 -160px;
@@ -27,6 +27,11 @@
     font-weight: 700;
     color: $primary-color;
   }
+}
+
+.errorLine{
+  margin-top: -10px;
+  margin-bottom: 10px;
 }
 
 .rememberLine {
