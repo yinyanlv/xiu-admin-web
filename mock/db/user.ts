@@ -16,7 +16,8 @@ mock.onPost('/api/login').reply((req) => {
         }
     });
     const result = isValid ? {
-        success: true
+        success: true,
+        result: params
     } : {
         success: false,
         message: '用户名或密码错误'

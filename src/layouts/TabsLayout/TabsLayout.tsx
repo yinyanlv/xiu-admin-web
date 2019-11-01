@@ -7,24 +7,10 @@ import {Header} from 'src/components/Header';
 import {SideNav} from 'src/components/SideNav';
 import {Footer} from 'src/components/Footer';
 import {RouteTabs} from 'src/components/RouteTabs';
-import {PageDashboard} from 'src/pages/Dashboard';
-import {PageUser} from 'src/pages/User';
 import {Notice} from 'src/components/Notice';
-
-const items = [{
-    path: '/dashboard',
-    key: 'dashboard',
-    title: 'Dashboard',
-    component: PageDashboard
-}, {
-    path: '/user',
-    key: 'user',
-    title: '用户',
-    component: PageUser
-}];
+import {routes} from './routes';
 
 interface TabsLayoutProps {
-
 }
 
 class TabsLayout extends React.PureComponent<TabsLayoutProps> {
@@ -47,7 +33,7 @@ class TabsLayout extends React.PureComponent<TabsLayoutProps> {
                     />
                     <Layout.Content className={styles.contentContainer}>
                         <div className={styles.innerContentContainer}>
-                            <RouteTabs items={items}  />
+                            <RouteTabs routes={routes}  />
                         </div>
                         <Footer></Footer>
                     </Layout.Content>

@@ -5,7 +5,7 @@ import {Route, RouteComponentProps, withRouter} from "react-router-dom";
 import styles from './RouteTabs.module.scss';
 
 interface RouteTabsProps extends RouteComponentProps{
-    items: any[]
+    routes: any[]
 }
 
 class RouteTabs extends React.Component<RouteTabsProps> {
@@ -16,7 +16,7 @@ class RouteTabs extends React.Component<RouteTabsProps> {
     };
 
     onTabClick = (targetKey, e) => {
-        const item = this.props.items.filter((item) => {
+        const item = this.props.routes.filter((item) => {
             if (item.key === targetKey) {
                 return true;
             } else {
@@ -27,7 +27,7 @@ class RouteTabs extends React.Component<RouteTabsProps> {
     };
 
     render() {
-        const {items, location} = this.props;
+        const {routes, location} = this.props;
         const activeTabKey = location.pathname.slice(1).replace(/\//g, ':');
 
         return (
@@ -39,7 +39,7 @@ class RouteTabs extends React.Component<RouteTabsProps> {
                       activeKey={activeTabKey}
                 >
                     {
-                        items.map((item) =>{
+                        routes.map((item) =>{
                             return (
                                 <Tabs.TabPane closable tab={item.title} key={item.key}>
                                     <Route path={item.path} exact>

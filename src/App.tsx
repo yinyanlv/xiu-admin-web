@@ -5,6 +5,8 @@ import 'mock';
 import store from './store';
 import history from './history';
 import {AppContext} from './AppContext';
+import {Auth} from 'src/components/Auth';
+
 import {NormalLayout} from 'src/layouts/NormalLayout';
 import {TabsLayout} from 'src/layouts/TabsLayout';
 
@@ -36,14 +38,16 @@ class App extends React.Component<AppProps> {
             <Provider store={store}>
                 <AppContext.Provider value={this.state}>
                     <Router history={history}>
-                        <Switch>
-                            <Route path={normalLayoutUrls}>
-                                <NormalLayout/>
-                            </Route>
-                            <Route path={'/'}>
-                                <TabsLayout/>
-                            </Route>
-                        </Switch>
+                        <Auth>
+                            <Switch>
+                                <Route path={normalLayoutUrls}>
+                                    <NormalLayout/>
+                                </Route>
+                                <Route path={'/'}>
+                                    <TabsLayout/>
+                                </Route>
+                            </Switch>
+                        </Auth>
                     </Router>
                 </AppContext.Provider>
             </Provider>

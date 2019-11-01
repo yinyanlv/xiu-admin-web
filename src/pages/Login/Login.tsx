@@ -1,13 +1,13 @@
 import React from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {RouteComponentProps} from 'react-router-dom';
-import {Button, Row, Form, Input, Icon, Checkbox} from 'antd';
+import {RouteConfigComponentProps} from 'react-router-config';
+import {Button, Row, Form, Input, Icon, Checkbox, Alert} from 'antd';
 import {FormComponentProps} from 'antd/lib/form/Form';
 import styles from './Login.module.scss';
 import * as actions from './actions';
 
-interface PageLoginProps extends FormComponentProps {
+interface PageLoginProps extends FormComponentProps, RouteConfigComponentProps {
     login: any;
     doLogin: Function;
 }
@@ -33,6 +33,9 @@ class PageLogin extends React.PureComponent<PageLoginProps> {
                 <div className={styles.logoLine}>
                     <span>xiu管理系统</span>
                 </div>
+                <Row>
+                    <Alert message="Error" type="error" showIcon />
+                </Row>
                 <div>
                     <form onSubmit={this.handleSubmit}>
                         <Form.Item hasFeedback>
@@ -76,6 +79,7 @@ class PageLogin extends React.PureComponent<PageLoginProps> {
                                 )
                             }
                         </Form.Item>
+
                         <Row className={styles.buttonLine}>
                             <Button type="primary" onClick={this.handleSubmit}>登录</Button>
                         </Row>

@@ -1,22 +1,18 @@
 import React from 'react';
-import {Switch, Route} from 'react-router-dom';
+import {Switch} from 'react-router-dom';
+import {renderRoutes} from 'react-router-config';
 import styles from  './NormalLayout.module.scss';
-import {PageLogin} from 'src/pages/Login';
-import {PageLoginHook} from 'src/pages/LoginHook';
+
+import {routes} from './routes';
 
 class NormalLayout extends React.Component {
     render() {
         return (
-            <>
-                <Switch>
-                    <Route path={"/login"} exact={false}>
-                        <PageLogin />
-                    </Route>
-                    <Route path={"/login-hook"}>
-                        <PageLoginHook />
-                    </Route>
-                </Switch>
-            </>
+            <Switch>
+                {
+                    renderRoutes(routes)
+                }
+            </Switch>
         );
     }
 }
