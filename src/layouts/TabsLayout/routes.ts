@@ -8,13 +8,13 @@ export const routes = [{
     title: 'Dashboard',
     component: PageDashboard,
     exact: true,
-    auth: ROLES.staff
+    auth: ROLES.guest
 }, {
     path: '/user',
     key: 'user',
     title: '用户',
     component: PageUser,
     exact: true,
-    auth: ROLES.staff
+    auth: ROLES.guest
 }];
 

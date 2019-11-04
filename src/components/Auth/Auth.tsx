@@ -1,7 +1,11 @@
 import React from 'react';
+import _ from 'lodash';
 import {withRouter, RouteComponentProps} from 'react-router-dom';
 import {matchRoutes} from 'react-router-config';
+import {routes as normalLayoutRoutes} from 'src/layouts/NormalLayout/routes';
 import {routes as tabsLayoutRoutes} from 'src/layouts/TabsLayout/routes';
+
+const allRoutes = [...normalLayoutRoutes, ...tabsLayoutRoutes];
 
 interface AuthProps extends RouteComponentProps{
 }
@@ -14,7 +18,7 @@ class Auth extends React.PureComponent<AuthProps> {
 
     static getDerivedStateFromProps(props, prevState) {
         const {location: {pathname}} = props;
-        const matchedRoutes = matchRoutes(tabsLayoutRoutes, pathname);
+        const matchedRoutes = matchRoutes(allRoutes, pathname);
         let matched;
 
         if (matchedRoutes.length) {
