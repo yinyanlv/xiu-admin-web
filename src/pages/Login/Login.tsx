@@ -9,7 +9,7 @@ import * as actions from './actions';
 
 interface PageLoginProps extends FormComponentProps, RouteConfigComponentProps {
     login: any;
-    doLogin: Function;
+    dispatch: any;
 }
 
 class PageLogin extends React.PureComponent<PageLoginProps> {
@@ -20,7 +20,10 @@ class PageLogin extends React.PureComponent<PageLoginProps> {
 
         validateFields((err, values) => {
             if (!err) {
-                this.props.doLogin(values);
+                this.props.dispatch({
+                    type: actions.DO_LOGIN,
+                    payload: values
+                });
             }
         });
     };
@@ -96,10 +99,4 @@ function mapStateToProps({login}) {
     };
 }
 
-function mapDispatchToProps(dispatch) {
-    return bindActionCreators({
-        doLogin: actions.doLogin
-    }, dispatch);
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Form.create<PageLoginProps>()(PageLogin));
+export default connect(mapStateToProps)(Form.create<PageLoginProps>()(PageLogin));

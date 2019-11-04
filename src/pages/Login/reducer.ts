@@ -13,7 +13,6 @@ function login(state = initialState, action) {
                 errorMessage: ''
             };
         case actions.LOGIN_FAILED:
-
             return {
                 isHandling: false,
                 errorMessage: action.payload

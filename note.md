@@ -45,3 +45,6 @@ lodash
 https://juejin.im/entry/598868126fb9a03c38109805
 https://github.com/brickspert/blog/issues/3
 ```
+
+## redux-saga
+sagaMiddleware.run(...)必须在createStore之后调用，否则会报找不到sagaMiddleware错误

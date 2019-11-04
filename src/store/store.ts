@@ -1,6 +1,8 @@
 import {combineReducers, createStore, compose, applyMiddleware} from 'redux';
 import thunk from 'redux-thunk';
+import createSagaMiddleware from 'redux-saga';
 import login from 'src/pages/Login/reducer';
+import rootSaga from './rootSaga';
 
 const composeEnhancer =
     process.env.NODE_ENV !== 'production' &&
@@ -13,8 +15,12 @@ const reducers = combineReducers({
     login
 });
 
-const enhancer = composeEnhancer(applyMiddleware(thunk));
+const sagaMiddleware = createSagaMiddleware();
+
+const enhancer = composeEnhancer(applyMiddleware(sagaMiddleware, thunk));
 
 const store = createStore(reducers, enhancer);
+
+sagaMiddleware.run(rootSaga);
 
 export default store;
