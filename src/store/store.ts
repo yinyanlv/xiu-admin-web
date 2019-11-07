@@ -1,7 +1,8 @@
 import {combineReducers, createStore, compose, applyMiddleware} from 'redux';
 import thunk from 'redux-thunk';
 import createSagaMiddleware from 'redux-saga';
-import login from 'src/pages/Login/reducer';
+import {loginState} from 'src/pages/Login/reducer';
+import {userState} from 'src/store/user/reducer';
 import rootSaga from './rootSaga';
 
 const composeEnhancer =
@@ -12,7 +13,8 @@ const composeEnhancer =
     }) : compose;
 
 const reducers = combineReducers({
-    login
+    loginState,
+    userState
 });
 
 const sagaMiddleware = createSagaMiddleware();

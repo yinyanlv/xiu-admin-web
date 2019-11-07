@@ -1,5 +1,4 @@
 import React from 'react';
-import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {RouteConfigComponentProps} from 'react-router-config';
 import {Button, Row, Form, Input, Icon, Checkbox, Alert} from 'antd';
@@ -8,7 +7,7 @@ import styles from './Login.module.scss';
 import * as actions from './actions';
 
 interface PageLoginProps extends FormComponentProps, RouteConfigComponentProps {
-    login: any;
+    loginState: any;
     dispatch: any;
 }
 
@@ -37,7 +36,7 @@ class PageLogin extends React.PureComponent<PageLoginProps> {
                     <span>xiu管理系统</span>
                 </div>
                 {
-                    this.props.login.errorMessage && <Alert className={styles.errorLine} message={this.props.login.errorMessage} type="error" showIcon />
+                    this.props.loginState.errorMessage && <Alert className={styles.errorLine} message={this.props.loginState.errorMessage} type="error" showIcon />
                 }
                 <div>
                     <form onSubmit={this.handleSubmit}>
@@ -93,9 +92,9 @@ class PageLogin extends React.PureComponent<PageLoginProps> {
     }
 }
 
-function mapStateToProps({login}) {
+function mapStateToProps({loginState}) {
     return {
-        login
+        loginState
     };
 }
 

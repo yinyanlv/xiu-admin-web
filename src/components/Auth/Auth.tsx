@@ -1,5 +1,4 @@
 import React from 'react';
-import _ from 'lodash';
 import {withRouter, RouteComponentProps} from 'react-router-dom';
 import {matchRoutes} from 'react-router-config';
 import {routes as normalLayoutRoutes} from 'src/layouts/NormalLayout/routes';

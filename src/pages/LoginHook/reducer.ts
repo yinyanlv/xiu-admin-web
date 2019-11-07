@@ -5,7 +5,7 @@ const initialState = {
     errorMessage: ''
 };
 
-function login(state = initialState, action) {
+export function loginState(state = initialState, action) {
     switch (action.type) {
         case actions.DO_LOGIN:
             return {
@@ -22,6 +22,4 @@ function login(state = initialState, action) {
             return state;
     }
 }
-
-export default login;
 
