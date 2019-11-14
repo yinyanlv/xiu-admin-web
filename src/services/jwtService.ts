@@ -71,3 +71,5 @@ class JwtService extends EventEmitter{
         return localStorage.getItem(this._storageKey);
     }
 }
+
+export const jwtService = new JwtService();

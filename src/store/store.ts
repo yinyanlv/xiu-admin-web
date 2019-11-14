@@ -2,7 +2,7 @@ import {combineReducers, createStore, compose, applyMiddleware} from 'redux';
 import thunk from 'redux-thunk';
 import createSagaMiddleware from 'redux-saga';
 import {loginState} from 'src/pages/Login/reducer';
-import {userState} from 'src/store/user/reducer';
+import {sessionState} from 'src/store/session/reducer';
 import rootSaga from './rootSaga';
 
 const composeEnhancer =
@@ -14,7 +14,7 @@ const composeEnhancer =
 
 const reducers = combineReducers({
     loginState,
-    userState
+    sessionState
 });
 
 const sagaMiddleware = createSagaMiddleware();

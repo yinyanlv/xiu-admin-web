@@ -8,7 +8,7 @@ function createAction(type, payload = {}) {
     };
 }
 
-export const loginAction = {
+export const loginActionCreator = {
     request: params => createAction(DO_LOGIN, params),
     failed: message => createAction(LOGIN_FAILED, message)
 };

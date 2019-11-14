@@ -1,6 +1,7 @@
 import React from 'react';
 import {withRouter, RouteComponentProps} from 'react-router-dom';
 import {matchRoutes} from 'react-router-config';
+import {jwtService} from 'src/services/jwtService';
 import {routes as normalLayoutRoutes} from 'src/layouts/NormalLayout/routes';
 import {routes as tabsLayoutRoutes} from 'src/layouts/TabsLayout/routes';
 
@@ -10,6 +11,11 @@ interface AuthProps extends RouteComponentProps{
 }
 
 class Auth extends React.PureComponent<AuthProps> {
+
+    constructor(props) {
+        super(props);
+
+    }
 
     state = {
         accessGranted: false
