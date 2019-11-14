@@ -1,5 +1,5 @@
 export const ROLES = {
-    admin: [],
-    staff: [],
-    guest: []
+    admin: ['admin'],
+    staff: ['admin', 'staff'],
+    guest: ['admin', 'staff', 'guest']
 };

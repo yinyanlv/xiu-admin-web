@@ -4,11 +4,11 @@ import {RouteConfigComponentProps} from 'react-router-config';
 import {Button, Row, Form, Input, Icon, Checkbox, Alert} from 'antd';
 import {FormComponentProps} from 'antd/lib/form/Form';
 import styles from './Login.module.scss';
-import * as actions from './actions';
+import {loginActionCreator} from './actions';
 
 interface PageLoginProps extends FormComponentProps, RouteConfigComponentProps {
     loginState: any;
-    dispatch: any;
+    dispatch: Function;
 }
 
 class PageLogin extends React.PureComponent<PageLoginProps> {
@@ -19,10 +19,7 @@ class PageLogin extends React.PureComponent<PageLoginProps> {
 
         validateFields((err, values) => {
             if (!err) {
-                this.props.dispatch({
-                    type: actions.DO_LOGIN,
-                    payload: values
-                });
+                this.props.dispatch(loginActionCreator.request(values));
             }
         });
     };

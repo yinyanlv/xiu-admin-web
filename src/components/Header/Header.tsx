@@ -1,5 +1,5 @@
 import React from 'react';
-import {Layout, Icon, Menu, Avatar, Popover, Badge} from 'antd';
+import {Layout, Icon, Menu, Avatar, Badge} from 'antd';
 import classnames from 'classnames';
 import styles from './Header.module.scss';
 

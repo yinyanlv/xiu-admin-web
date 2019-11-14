@@ -12,10 +12,6 @@ class SideNav extends React.PureComponent<SideNavProps> {
 
     static contextType = AppContext;
 
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         const {location} = this.props;
         const context = this.context;

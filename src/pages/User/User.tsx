@@ -1,5 +1,5 @@
 import React from 'react';
-import {Table, Form, Input, Icon, Row, Col, Button} from 'antd';
+import {Table, Form, Input, Row, Col, Button} from 'antd';
 import styles from './User.module.scss';
 
 export class PageUser extends React.PureComponent {
