@@ -10,7 +10,7 @@ import {Auth} from 'src/components/Auth';
 import {NormalLayout} from 'src/layouts/NormalLayout';
 import {TabsLayout} from 'src/layouts/TabsLayout';
 
-const normalLayoutUrls = ['/login', '/login-hook'];
+const normalLayoutUrls = ['/login', '/login-hook', '/404'];
 
 interface AppProps {
     [key: string]: any
