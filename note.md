@@ -9,10 +9,11 @@
 ## 按组件加载antd组件样式并定制主题样式
 安装babel-plugin-import, react-app-rewired, customize-cra, less, less-loader
 
-## 需要安装types文件的包
+## 需要安装types文件的常用包
 react-redux
 react-router-dom
 lodash
+react-transition-group
 
 ## 针对ts文件定义路径别名
 步骤一：项目根目录下添加.env文件， 添加配置项NODE_PATH=./（用于node编译时定位）
